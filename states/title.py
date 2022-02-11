@@ -16,7 +16,7 @@ class Title(State):
 
     def render(self, surface):
         surface.fill(self.game.colors["white"])
-        self.game.draw_text(surface, 17, "EVOG the Adventure",
+        self.game.draw_text(surface, 12, "EVOG the Adventure",
                             self.game.colors["black"], self.game.GAME_W * .5, self.game.GAME_H * .45)
         self.game.draw_text(surface, 7, "Enter to start",
                             self.game.colors["black"], self.game.GAME_W * .5, self.game.GAME_H * .55)

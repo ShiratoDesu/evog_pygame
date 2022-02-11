@@ -7,8 +7,8 @@ from states.title import Title
 class Game():
     def __init__(self) -> None:
         pygame.init()
-        self.GAME_W, self.GAME_H = 400, 300
-        self.SCREEN_W, self.SCREEN_H = 800, 600
+        self.GAME_W, self.GAME_H = 320, 180
+        self.SCREEN_W, self.SCREEN_H = 1280, 720
         self.game_canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         self.screen = pygame.display.set_mode((self.SCREEN_W, self.SCREEN_H))
         self.running, self.playing = True, True
@@ -49,17 +49,17 @@ class Game():
                     self.actions["left"] = True
                 if event.key == pygame.K_RIGHT:
                     self.actions["right"] = True
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_RETURN:
-                    self.actions["enter"] = False
-                if event.key == pygame.K_UP:
-                    self.actions["up"] = False
-                if event.key == pygame.K_DOWN:
-                    self.actions["down"] = False
-                if event.key == pygame.K_LEFT:
-                    self.actions["left"] = False
-                if event.key == pygame.K_RIGHT:
-                    self.actions["right"] = False
+            # if event.type == pygame.KEYUP:
+            #     if event.key == pygame.K_RETURN:
+            #         self.actions["enter"] = False
+            #     if event.key == pygame.K_UP:
+            #         self.actions["up"] = False
+            #     if event.key == pygame.K_DOWN:
+            #         self.actions["down"] = False
+            #     if event.key == pygame.K_LEFT:
+            #         self.actions["left"] = False
+            #     if event.key == pygame.K_RIGHT:
+            #         self.actions["right"] = False
 
     def update(self):
         self.state_stack[-1].update(self.dt, self.actions)
