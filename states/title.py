@@ -1,25 +1,32 @@
 from states.state import State
 from states.main_menu import MainMenu
+from assets.draw import Draw
+from assets.sound import Sound
+
 
 class Title(State):
     def __init__(self, game) -> None:
         State.__init__(self, game)
-        self.game.fade_screen("black", 300, self)
+        self.draw.fade_screen("black", self, self.canvas_w, self.canvas_h,
+                              self.screen_w, self.screen_h, self.canvas, self.screen)
 
     def update(self, delta_time, actions):
         if actions["enter"]:
-            self.game.play_sound(self.game.confirm_echo_sound)
+            self.sound.play_sound(
+                self.sound.confirm_echo_sound, self.overall_volume, self.effect_volume)
             new_state = MainMenu(self.game)
-            self.game.fade_screen("white", 200, new_state)
+            self.draw.fade_screen("white", new_state, self.canvas_w, self.canvas_h,
+                                  self.screen_w, self.screen_h, self.canvas, self.screen)
             new_state.enter_state()
         if actions["escape"]:
-            self.game.play_sound(self.game.back_echo_sound)
+            self.sound.play_sound(self.sound.back_echo_sound,
+                                  self.overall_volume, self.effect_volume)
             self.game.game_delay(1)
             self.game.exit_game()
 
     def render(self, surface):
         surface.fill(self.game.colors["white"])
-        self.game.draw_text(surface, 12, "EVOG the Adventure",
-                            "black", self.game.GAME_W * .5, self.game.GAME_H * .45)
-        self.game.draw_text(surface, 7, "Enter to start",
-                            "black", self.game.GAME_W * .5, self.game.GAME_H * .55)
+        self.draw.draw_text(surface, 12, "EVOG the Adventure",
+                            "black", self.canvas_w * .5, self.canvas_h * .45, self.anti_aliasing_text)
+        self.draw.draw_text(surface, 7, "Enter to start",
+                            "black", self.canvas_w * .5, self.canvas_h * .55, self.anti_aliasing_text)
