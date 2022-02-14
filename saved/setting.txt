@@ -1,1 +1,1 @@
-{"SCREEN_W": 1280, "SCREEN_H": 720, "anti_aliasing_text": false, "MAX_FPS": 60, "overall_sound": 1, "music_sound": 1, "effect_sound": 1}
+{"SCREEN_W": 1280, "SCREEN_H": 720, "anti_aliasing_text": false, "MAX_FPS": 60, "overall_sound": 0.5, "music_sound": 1, "effect_sound": 1}

@@ -15,7 +15,7 @@ class Game():
             "SCREEN_H": 720,
             "anti_aliasing_text": False,
             "MAX_FPS": 60,
-            "overall_sound": 1,
+            "overall_sound": 0.5,
             "music_sound": 1,
             "effect_sound": 1
         }

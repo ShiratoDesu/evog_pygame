@@ -5,7 +5,6 @@ from states.state import State
 class Menu(State):
     def __init__(self, game) -> None:
         State.__init__(self, game)
-        self.surface = self.game.game_canvas
         self.box_actions = {
             "escape": False,
             "enter": False,
@@ -56,25 +55,24 @@ class Menu(State):
                 self.play_back_sound()
                 need_confirm = False
             self.move_cursor(self.box_actions)
-            self.draw_confirm_box(self.canvas, header_text)
+            self.draw_confirm_box(header_text)
             self.update_screen()
             self.reset_key()
         return confirm
 
-    def draw_confirm_box(self, surface, header_text):
+    def draw_confirm_box(self, header_text, size=10):
         middle_x, middle_y = self.canvas_w / 2, self.canvas_h / 2
         # draw box
         box = pygame.Surface((100, 60))
         box.fill("gray")
-        box_rect = box.get_rect(
-            center=(self.canvas_w / 2, self.canvas_h / 2))
-        surface.blit(box, box_rect)
+        box_rect = box.get_rect(center=(middle_x, middle_y))
+        self.canvas.blit(box, box_rect)
         # draw text
-        self.draw.draw_text(surface, 10, header_text, "yellow",
-                            middle_x, middle_y - 10, self.anti_aliasing_text)
+        self.draw.draw_text(size, header_text, "yellow",
+                            middle_x, middle_y - 10)
         for choice in self.box_text:
-            self.draw.draw_text(surface, choice[0], choice[1], choice[2],
-                                middle_x + choice[3], middle_y + choice[4], self.anti_aliasing_text)
+            self.draw.draw_text(
+                choice[0], choice[1], choice[2], middle_x + choice[3], middle_y + choice[4])
 
     def get_event(self):
         for event in pygame.event.get():

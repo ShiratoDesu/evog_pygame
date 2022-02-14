@@ -4,11 +4,14 @@ from assets.assets import Assets
 
 
 class Sound(Assets):
-    def __init__(self) -> None:
+    def __init__(self, overall_volume, music_volume, effect_volume) -> None:
         Assets.__init__(self)
         self.load_dir()
         self.load_bg_musics()
         self.load_sounds_effects()
+        self.overall_volume = overall_volume
+        self.music_volume = music_volume
+        self.effect_volume = effect_volume
 
     def load_dir(self):
         self.bg_musics_dir = os.path.join(self.sounds_dir, "bg_musics")
@@ -34,8 +37,8 @@ class Sound(Assets):
         self.back_echo_sound = os.path.join(self.effects_dir, "back_echo.ogg")
         self.error_sound = os.path.join(self.effects_dir, "error.ogg")
 
-    def play_music(self, music_path, overall_volume=1, music_volume=1, time=-1):
-        volume = overall_volume * music_volume
+    def play_music(self, music_path, time=-1):
+        volume = self.overall_volume * self.music_volume
         pygame.mixer.music.load(music_path)
         pygame.mixer.music.play(time)
         pygame.mixer.music.set_volume(volume)
@@ -46,8 +49,8 @@ class Sound(Assets):
     def fadeout_music(self, fadeout_sec):
         pygame.mixer.music.fadeout(int(fadeout_sec * 1000))
 
-    def play_sound(self, sound_path, overall_volume=1, effect_volume=1):
-        volume = overall_volume * effect_volume
+    def play_sound(self, sound_path):
+        volume = self.overall_volume * self.effect_volume
         sound_effect = pygame.mixer.Sound(sound_path)
         sound_effect.play()
         sound_effect.set_volume(volume)
