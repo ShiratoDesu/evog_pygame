@@ -1,7 +1,5 @@
 from states.state import State
 from states.main_menu import MainMenu
-from assets.draw import Draw
-from assets.sound import Sound
 
 
 class Title(State):

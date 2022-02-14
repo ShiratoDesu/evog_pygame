@@ -1,7 +1,5 @@
 import pygame
 from states.state import State
-from assets.sound import Sound
-from assets.draw import Draw
 
 
 class Menu(State):
