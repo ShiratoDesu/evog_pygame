@@ -1,6 +1,6 @@
 from states.game_scene import GameScene
-from states.menu import Menu
-from states.options_menu import Options
+from states.menus.menu import Menu
+from states.menus.options.options_menu import Options
 
 
 class MainMenu(Menu):
@@ -16,7 +16,7 @@ class MainMenu(Menu):
             [7, "Exit", "white", .5, .8]
         )
         self.menu_index = 0
-        self.cursor_offset = 50
+        self.CURSOR_OFFSET = 40
 
     def update(self, delta_time, actions):
         self.update_cursor(actions)
@@ -29,17 +29,19 @@ class MainMenu(Menu):
     def render(self, surface):
         surface.fill("black")
         self.draw.draw_text(12, "EVOG the Adventure", "yellow",
-                            self.canvas_w * .5, self.canvas_h * .3)
+                            self.CANVAS_W * .5, self.CANVAS_H * .3)
         self.draw_menu_and_cursor(surface)
 
     def draw_menu_and_cursor(self, surface):
         # menu here
         for menu in self.menus:
-            self.draw.draw_text(menu[0], menu[1], menu[2], self.canvas_w *
-                                menu[3], self.canvas_h * menu[4])
+            self.draw.draw_text(menu[0], menu[1], menu[2], self.CANVAS_W *
+                                menu[3], self.CANVAS_H * menu[4])
         # cursor here
-        self.draw.draw_text(9, "X", "gray", (self.canvas_w * self.menus[self.menu_index][3]) -
-                            self.cursor_offset, self.canvas_h * self.menus[self.menu_index][4])
+        self.draw.draw_text(9, ">", "gray", (self.CANVAS_W * self.menus[self.menu_index][3]) -
+                            self.CURSOR_OFFSET, self.CANVAS_H * self.menus[self.menu_index][4])
+        self.draw.draw_text(9, "<", "gray", (self.CANVAS_W * self.menus[self.menu_index][3]) +
+                            self.CURSOR_OFFSET, self.CANVAS_H * self.menus[self.menu_index][4])
 
     # change menu index if press up and down button
     def update_cursor(self, actions):

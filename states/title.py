@@ -1,5 +1,5 @@
 from states.state import State
-from states.main_menu import MainMenu
+from states.menus.main_menu import MainMenu
 
 
 class Title(State):
@@ -19,8 +19,8 @@ class Title(State):
             self.game.exit_game()
 
     def render(self, surface):
-        surface.fill(self.game.colors["white"])
+        surface.fill("white")
         self.draw.draw_text(12, "EVOG the Adventure",
-                            "black", self.canvas_w * .5, self.canvas_h * .45)
+                            "black", self.CANVAS_W * .5, self.CANVAS_H * .45)
         self.draw.draw_text(7, "Enter to start",
-                            "black", self.canvas_w * .5, self.canvas_h * .55)
+                            "black", self.CANVAS_W * .5, self.CANVAS_H * .55)

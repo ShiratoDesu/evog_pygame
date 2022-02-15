@@ -11,10 +11,10 @@ class Game():
         pygame.mixer.pre_init(44100, -16, 2, 512)
         pygame.init()
         self.setting_value = {
-            "SCREEN_W": 1280,
-            "SCREEN_H": 720,
+            "screen_w": 1280,
+            "screen_h": 720,
             "anti_aliasing_text": False,
-            "MAX_FPS": 60,
+            "max_fps": 60,
             "overall_sound": 0.5,
             "music_sound": 1,
             "effect_sound": 1
@@ -22,7 +22,7 @@ class Game():
         self.GAME_W, self.GAME_H = 320, 180
         self.game_canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         self.screen = pygame.display.set_mode(
-            (self.setting_value["SCREEN_W"], self.setting_value["SCREEN_H"]))
+            (self.setting_value["screen_w"], self.setting_value["screen_h"]))
         self.running, self.playing = True, True
         self.actions = {
             "left": False,
@@ -51,7 +51,7 @@ class Game():
             self.update()
             self.render()
             pygame.display.flip()
-            self.clock.tick(self.setting_value["MAX_FPS"])
+            self.clock.tick(self.setting_value["max_fps"])
 
     def get_events(self):
         for event in pygame.event.get():
@@ -91,7 +91,7 @@ class Game():
     def render(self):
         self.state_stack[-1].render(self.game_canvas)
         self.screen.blit(pygame.transform.scale(
-            self.game_canvas, (self.setting_value["SCREEN_W"], self.setting_value["SCREEN_H"])), (0, 0))
+            self.game_canvas, (self.setting_value["screen_w"], self.setting_value["screen_h"])), (0, 0))
 
 # Game Section
 

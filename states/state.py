@@ -7,10 +7,11 @@ class State():
     def __init__(self, game) -> None:
         self.game = game
         self.prev_state = None
-        self.canvas_w, self.canvas_h = game.game_canvas.get_size()
+        self.CANVAS_W, self.CANVAS_H = game.game_canvas.get_size()
         self.screen_w, self.screen_h = game.screen.get_size()
         self.canvas = game.game_canvas
         self.screen = game.screen
+
         self.sound = Sound(game.setting_value["overall_sound"],
                            game.setting_value["music_sound"],
                            game.setting_value["effect_sound"])
