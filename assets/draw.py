@@ -30,7 +30,6 @@ class Draw(Assets):
         fade_canvas = pygame.Surface((self.canvas_w, self.canvas_h))
         opacity = 0
         fade_canvas.fill(color)
-        timer = 0
         for i in range(0, fade_time):
             opacity += 1
             fade_canvas.set_alpha(opacity)

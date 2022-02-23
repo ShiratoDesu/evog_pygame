@@ -41,7 +41,7 @@ class Menu(State):
     def play_error_sound(self):
         self.sound.play_sound(self.sound.error_sound)
 
-    def check_confirm(self, header_text):
+    def check_confirm(self, header_text, size=10):
         need_confirm = True
         confirm = False
         self._box_text[0][0] += 2
@@ -61,12 +61,12 @@ class Menu(State):
                 self.play_back_sound()
                 need_confirm = False
             self._move_cursor(self._box_actions)
-            self._draw_confirm_box(header_text)
+            self._draw_confirm_box(header_text, size)
             self._update_screen()
             self._reset_key()
         return confirm
 
-    def _draw_confirm_box(self, header_text, size=10):
+    def _draw_confirm_box(self, header_text, size):
         middle_x, middle_y = self.CANVAS_W / 2, self.CANVAS_H / 2
         # draw box
         box = pygame.Surface((100, 60))
