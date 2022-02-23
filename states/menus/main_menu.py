@@ -1,6 +1,6 @@
 from states.game_scene import GameScene
 from states.menus.menu import Menu
-from states.menus.options.options_menu import Options
+from states.menus.options_menu import Options
 
 
 class MainMenu(Menu):
