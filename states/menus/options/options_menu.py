@@ -34,6 +34,7 @@ class Options(Menu):
         # when select choice to set
         self.is_setting = False
         self.setting_index = 0
+        self.last_setting_index = 0
         self.SETTING_OFFSET = -40
         self.setable_value = []
 
@@ -150,19 +151,20 @@ class Options(Menu):
 
     def get_setable_value(self):
         self.setable_value.clear()
-        fullscreen_value = ["On", "Off"]
+        fullscreen_value = ["Off", "On"]
         if self.options[self.menu_index][1] == "Fullscreen":
-            self.setable_value.append(self.fullscreen)
             for value in fullscreen_value:
-                if value not in self.setable_value:
-                    self.setable_value.append(value)
+                self.setable_value.append(value)
+                if value == self.fullscreen:
+                    self.setting_index = fullscreen_value.index(value)
+            self.last_setting_index = self.setting_index
 
     def fullscreen_choice(self, actions):
-        last_setting = self.setable_value[0]
+        last_setting = self.setable_value[self.last_setting_index]
         self.fullscreen = self.setable_value[self.setting_index]
         if actions["enter"] & (self.fullscreen != last_setting):
             self.play_confirm_sound()
-            last_value = self.game.setting_value["fullscreen"]
+            last_bool = self.game.setting_value["fullscreen"]
             if self.fullscreen == "On":
                 pygame.display.toggle_fullscreen()
                 self.game.setting_value["fullscreen"] = True
@@ -171,14 +173,13 @@ class Options(Menu):
                 self.game.setting_value["fullscreen"] = False
             if self.check_confirm("Save change?", 6) != True:
                 pygame.display.toggle_fullscreen()
+                self.game.setting_value["fullscreen"] = last_bool
                 self.fullscreen = last_setting
-                self.setted_value[0][1] = last_value
-            self.setting_index = 0
+                self.setted_value[0][1] = last_setting
             self.is_setting = False
         if actions["escape"]:
             self.play_back_sound()
             if self.check_confirm("Discard change?", 6):
                 self.fullscreen = last_setting
                 self.setted_value[0][1] = last_setting
-                self.setting_index = 0
                 self.is_setting = False
