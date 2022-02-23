@@ -4,14 +4,14 @@ from assets.assets import Assets
 
 
 class Draw(Assets):
-    def __init__(self, canvas, screen, anti_aliasing) -> None:
+    def __init__(self, canvas, screen) -> None:
         Assets.__init__(self)
         self.load_font()
         self.canvas = canvas
         self.screen = screen
         self.canvas_w, self.canvas_h = canvas.get_size()
         self.screen_w, self.screen_h = screen.get_size()
-        self.anti_aliasing = anti_aliasing
+        self.anti_aliasing = False
 
     def load_font(self):
         self.main_font = os.path.join(self.font_dir, "PressStart2P-vaV7.ttf")
@@ -30,6 +30,7 @@ class Draw(Assets):
         fade_canvas = pygame.Surface((self.canvas_w, self.canvas_h))
         opacity = 0
         fade_canvas.fill(color)
+        timer = 0
         for i in range(0, fade_time):
             opacity += 1
             fade_canvas.set_alpha(opacity)

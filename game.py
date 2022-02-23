@@ -8,22 +8,29 @@ from states.title import Title
 
 class Game():
     def __init__(self) -> None:
+        
+        os.environ['SDL_VIDEO_CENTERED'] = '1'
         pygame.mixer.pre_init(44100, -16, 2, 512)
         pygame.init()
+        pygame.display.set_caption("Evog")
+        
         self.setting_value = {
+            "fullscreen": False,
             "screen_w": 1280,
             "screen_h": 720,
-            "anti_aliasing_text": False,
             "max_fps": 60,
             "overall_sound": 0.5,
             "music_sound": 1,
             "effect_sound": 1
         }
+        
         self.GAME_W, self.GAME_H = 320, 180
         self.game_canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         self.screen = pygame.display.set_mode(
             (self.setting_value["screen_w"], self.setting_value["screen_h"]))
+        
         self.running, self.playing = True, True
+        
         self.actions = {
             "left": False,
             "right": False,
@@ -32,12 +39,14 @@ class Game():
             "enter": False,
             "escape": False
         }
+        
         self.colors = {
             "black": (0, 0, 0),
             "white": (255, 255, 255),
             "red": (255, 0, 0),
             "yellow": (255, 255, 0)
         }
+        
         self.dt, self.prev_time = 0, 0
         self.state_stack = []
         self.clock = pygame.time.Clock()

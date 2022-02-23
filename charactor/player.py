@@ -5,7 +5,6 @@ from assets.sprites import Sprites
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         super().__init__()
-        self.idle()
         self.pos_x = pos_x
         self.pos_y = pos_y
 
@@ -15,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprite.knight[self.current_sprite]
         self.rect = self.image.get_rect()
         self.rect.center = [pos_x, pos_y]
+        self.idle_animation = False
 
     def idle(self):
         self.idle_animation = True

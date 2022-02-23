@@ -1,1 +1,1 @@
-{"screen_w": 1280, "screen_h": 720, "anti_aliasing_text": false, "max_fps": 60, "overall_sound": 0.5, "music_sound": 1, "effect_sound": 1}
+{"fullscreen": false, "screen_w": 1280, "screen_h": 720, "max_fps": 60, "overall_sound": 0.5, "music_sound": 1, "effect_sound": 1}

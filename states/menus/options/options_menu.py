@@ -8,16 +8,16 @@ class Options(Menu):
         self.get_setted_value()
 
         self.options = (
-            [7, "Resolution", "white", .20, .35],
-            [6, "Anti-Aliasing Text", "white", .20, .45],
+            [7, "Fullscreen", "white", .20, .35],
+            [6, "Resolution", "white", .20, .45],
             [6, "Max FPS", "white", .20, .55],
             [6, "Overall volume", "white", .20, .65],
             [6, "Music volume", "white", .20, .75],
             [6, "Effect volume", "white", .20, .85]
         )
         self.setted_value = (
-            [7, self.resolution, "white", .75, .35],
-            [6, self.antialias, "white", .75, .45],
+            [7, self.fullscreen, "white", .75, .35],
+            [6, self.resolution, "white", .75, .45],
             [6, self.max_fps, "white", .75, .55],
             [6, self.overall_volume, "white", .75, .65],
             [6, self.music_volume, "white", .75, .75],
@@ -61,9 +61,9 @@ class Options(Menu):
         self.setted_value[self.menu_index][2] = "gray"
 
     def transition_state(self):
-        if self.options[self.menu_index][1] == "Resoulution":
+        if self.options[self.menu_index][1] == "Fullscreen":
             pass
-        elif self.options[self.menu_index][1] == "Anti-Aliasing Text":
+        elif self.options[self.menu_index][1] == "Resolution":
             pass
         elif self.options[self.menu_index][1] == "Max FPS":
             pass
@@ -75,11 +75,11 @@ class Options(Menu):
             pass
 
     def get_setted_value(self):
-        self.resolution = str(self.screen_w) + "*" + str(self.screen_h)
-        if self.game.setting_value["anti_aliasing_text"] == True:
-            self.antialias = "On"
+        if self.game.setting_value["fullscreen"] == True:
+            self.fullscreen = "On"
         else:
-            self.antialias = "Off"
+            self.fullscreen = "Off"
+        self.resolution = str(self.screen_w) + "*" + str(self.screen_h)
         self.max_fps = self.game.setting_value["max_fps"]
         self.overall_volume = int(
             (self.game.setting_value["overall_sound"] / 0.5) * 100)

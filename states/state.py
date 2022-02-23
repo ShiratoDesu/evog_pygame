@@ -15,8 +15,7 @@ class State():
         self.sound = Sound(game.setting_value["overall_sound"],
                            game.setting_value["music_sound"],
                            game.setting_value["effect_sound"])
-        self.draw = Draw(self.canvas, self.screen,
-                         game.setting_value["anti_aliasing_text"])
+        self.draw = Draw(self.canvas, self.screen)
         self.sprites = Sprites()
 
     def update(self, delta_time, actions):
