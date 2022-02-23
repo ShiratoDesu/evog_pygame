@@ -19,8 +19,8 @@ class Player(pygame.sprite.Sprite):
     def idle(self):
         self.idle_animation = True
 
-    def update(self, speed):
-        if self.idle_animation == True:
+    def update(self, speed, animation=False):
+        if animation == True:
             self.current_sprite += speed
             if int(self.current_sprite) >= len(self.sprite.knight):
                 self.current_sprite = 0
@@ -28,28 +28,12 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprite.knight[int(self.current_sprite)]
 
 # Creating the sprites and groups
-    def draw_sprite(self, screen):
+    def draw_sprite(self, screen, animation):
         self.moving_sprites.draw(screen)
-        self.moving_sprites.update(0.25)
+        self.moving_sprites.update(0.25, animation)
 
     
     def add_player(self):
         self.moving_sprites = pygame.sprite.Group()
         player = Player(self.pos_x, self.pos_y)
         self.moving_sprites.add(player)
-
-# #while True:
-#     for event in pygame.event.get():
-#         player.idle()
-#         if event.type == pygame.QUIT:
-#             pygame.quit()
-#             sys.exit()
-#         #if event.type == pygame.KEYDOWN:
-#             #player.idle()
-
-    # Drawing
-    # screen.fill((0, 0, 0))
-    # moving_sprites.draw(screen)
-    # moving_sprites.update(0.25)
-    # pygame.display.flip()
-    # clock.tick(60)
