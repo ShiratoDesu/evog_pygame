@@ -1,1 +1,1 @@
-{"fullscreen": true, "max_fps": 30, "overall_sound": 0.5, "music_sound": 1, "effect_sound": 1}
+{"fullscreen": true, "max_fps": 60, "overall_sound": 0.5, "music_sound": 1.0, "effect_sound": 1.0}

@@ -24,12 +24,15 @@ class Game():
         self.load_saved()
 
         self.GAME_W, self.GAME_H = 320, 180
-        self.SCREEN_W, self.SCREEN_H = 1280, 720
-        self.game_canvas = pygame.Surface((self.GAME_W, self.GAME_H))
+        self.DEFAULT_W, self.DEFAULT_H = 1280, 720
+        self.canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         if self.setting_value["fullscreen"] == True:
+            monitor = pygame.display.Info()
+            self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)
         else:
+            self.SCREEN_W, self.SCREEN_H = self.DEFAULT_W, self.DEFAULT_H
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H))
 
@@ -100,9 +103,9 @@ class Game():
         self.reset_keys()
 
     def render(self):
-        self.state_stack[-1].render(self.game_canvas)
+        self.state_stack[-1].render(self.canvas)
         self.screen.blit(pygame.transform.scale(
-            self.game_canvas, (self.SCREEN_W, self.SCREEN_H)), (0, 0))
+            self.canvas, (self.SCREEN_W, self.SCREEN_H)), (0, 0))
         pygame.display.flip()
 
 # Game Section
@@ -121,9 +124,12 @@ class Game():
 
     def change_resolution(self):
         if self.setting_value["fullscreen"] == True:
+            monitor = pygame.display.Info()
+            self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)
         else:
+            self.SCREEN_W, self.SCREEN_H = self.DEFAULT_W, self.DEFAULT_H
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H))
         self.render()

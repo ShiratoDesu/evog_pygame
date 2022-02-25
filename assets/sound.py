@@ -40,8 +40,8 @@ class Sound(Assets):
     def play_music(self, music_path, time=-1):
         volume = self.overall_volume * self.music_volume
         pygame.mixer.music.load(music_path)
-        pygame.mixer.music.play(time)
         pygame.mixer.music.set_volume(volume)
+        pygame.mixer.music.play(time)
 
     def queue_music(self, music_path, time=-1):
         pygame.mixer.music.queue(music_path, "next", time)
@@ -52,5 +52,5 @@ class Sound(Assets):
     def play_sound(self, sound_path):
         volume = self.overall_volume * self.effect_volume
         sound_effect = pygame.mixer.Sound(sound_path)
-        sound_effect.play()
         sound_effect.set_volume(volume)
+        sound_effect.play()
