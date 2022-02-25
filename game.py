@@ -16,8 +16,6 @@ class Game():
 
         self.setting_value = {
             "fullscreen": False,
-            "screen_w": 1280,
-            "screen_h": 720,
             "max_fps": 60,
             "overall_sound": 0.5,
             "music_sound": 1,
@@ -26,13 +24,14 @@ class Game():
         self.load_saved()
 
         self.GAME_W, self.GAME_H = 320, 180
+        self.SCREEN_W, self.SCREEN_H = 1280, 720
         self.game_canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         if self.setting_value["fullscreen"] == True:
             self.screen = pygame.display.set_mode(
-                (self.setting_value["screen_w"], self.setting_value["screen_h"]), pygame.FULLSCREEN)
+                (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)
         else:
             self.screen = pygame.display.set_mode(
-                (self.setting_value["screen_w"], self.setting_value["screen_h"]))
+                (self.SCREEN_W, self.SCREEN_H))
 
         self.running, self.playing = True, True
 
@@ -63,7 +62,6 @@ class Game():
             self.get_events()
             self.update()
             self.render()
-            pygame.display.flip()
             self.clock.tick(self.setting_value["max_fps"])
 
     def get_events(self):
@@ -104,7 +102,8 @@ class Game():
     def render(self):
         self.state_stack[-1].render(self.game_canvas)
         self.screen.blit(pygame.transform.scale(
-            self.game_canvas, (self.setting_value["screen_w"], self.setting_value["screen_h"])), (0, 0))
+            self.game_canvas, (self.SCREEN_W, self.SCREEN_H)), (0, 0))
+        pygame.display.flip()
 
 # Game Section
 
@@ -119,6 +118,15 @@ class Game():
 
     def game_delay(self, delay_sec):
         pygame.time.delay(delay_sec * 1000)
+
+    def change_resolution(self):
+        if self.setting_value["fullscreen"] == True:
+            self.screen = pygame.display.set_mode(
+                (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)
+        else:
+            self.screen = pygame.display.set_mode(
+                (self.SCREEN_W, self.SCREEN_H))
+        self.render()
 
     def exit_game(self):
         self.save_data()

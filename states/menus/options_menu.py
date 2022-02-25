@@ -12,20 +12,18 @@ class Options(Menu):
         # size, text, color, % canvas width, % canvas height
         self.options = (
             [7, "Fullscreen", "white", .20, .35],
-            [6, "Resolution", "white", .20, .45],
-            [6, "Max FPS", "white", .20, .55],
-            [6, "Overall volume", "white", .20, .65],
-            [6, "Music volume", "white", .20, .75],
-            [6, "Effect volume", "white", .20, .85]
+            [6, "Max FPS", "white", .20, .45],
+            [6, "Overall volume", "white", .20, .55],
+            [6, "Music volume", "white", .20, .65],
+            [6, "Effect volume", "white", .20, .75],
         )
         # size, tect, color, % canvas width, % canvas height, num of setable value
         self.setted_value = (
             [7, self.fullscreen, "white", .75, .35, 2],
-            [6, self.resolution, "white", .75, .45, 3],
-            [6, self.max_fps, "white", .75, .55, 2],
-            [6, self.overall_volume, "white", .75, .65, 5],
-            [6, self.music_volume, "white", .75, .75, 5],
-            [6, self.effect_volume, "white", .75, .85, 5]
+            [6, self.max_fps, "white", .75, .45, 3],
+            [6, self.overall_volume, "white", .75, .55, 2],
+            [6, self.music_volume, "white", .75, .65, 5],
+            [6, self.effect_volume, "white", .75, .75, 5],
         )
 
         self.menu_index = 0
@@ -94,7 +92,6 @@ class Options(Menu):
             self.fullscreen = "On"
         else:
             self.fullscreen = "Off"
-        self.resolution = str(self.screen_w) + "*" + str(self.screen_h)
         self.max_fps = self.game.setting_value["max_fps"]
         self.overall_volume = int(
             self.game.setting_value["overall_sound"] * 10)
@@ -106,11 +103,10 @@ class Options(Menu):
     # assign value of variable to setted_value list
     def update_setted_value(self):
         self.setted_value[0][1] = self.fullscreen
-        self.setted_value[1][1] = self.resolution
-        self.setted_value[2][1] = self.max_fps
-        self.setted_value[3][1] = self.overall_volume
-        self.setted_value[4][1] = self.music_volume
-        self.setted_value[5][1] = self.effect_volume
+        self.setted_value[1][1] = self.max_fps
+        self.setted_value[2][1] = self.overall_volume
+        self.setted_value[3][1] = self.music_volume
+        self.setted_value[4][1] = self.effect_volume
 
     # draw each value and option setting
     def draw_options(self):
@@ -133,8 +129,6 @@ class Options(Menu):
     def run_setting_by_index(self, actions):
         if self.options[self.menu_index][1] == "Fullscreen":
             self.fullscreen_choice(actions)
-        elif self.options[self.menu_index][1] == "Resolution":
-            pass
         elif self.options[self.menu_index][1] == "Max FPS":
             self.max_fps_choice(actions)
         elif self.options[self.menu_index][1] == "Overall volume":
@@ -169,26 +163,25 @@ class Options(Menu):
                 self.play_error_sound()
 
     # create list of each setting in options and set last index
-    def get_setable_value(self):
+    def create_setable(self, list, current_value):
         self.setable_value.clear()
+        for value in list:
+            self.setable_value.append(value)
+            if value == current_value:
+                self.setting_index = list.index(value)
+        self.last_setting_index = self.setting_index
+
+    def get_setable_value(self):
         fullscreen_value = ["Off", "On"]
-        max_fps_value = [30,60]
+        max_fps_value = [30, 60]
 
         # create fullscreen setting list
         if self.options[self.menu_index][1] == "Fullscreen":
-            for value in fullscreen_value:
-                self.setable_value.append(value)
-                if value == self.fullscreen:
-                    self.setting_index = fullscreen_value.index(value)
-            self.last_setting_index = self.setting_index
+            self.create_setable(fullscreen_value, self.fullscreen)
 
         # create max fps setting list
         elif self.options[self.menu_index][1] == "Max FPS":
-            for value in max_fps_value:
-                self.setable_value.append(value)
-                if value == self.max_fps:
-                    self.setting_index = max_fps_value.index(value)
-            self.last_setting_index = self.setting_index
+            self.create_setable(max_fps_value, self.max_fps)
 
     # method to run when fullscreen is selected
     def fullscreen_choice(self, actions):
@@ -202,21 +195,14 @@ class Options(Menu):
         # if player press enter to change value that not last value
         if actions["enter"] & (self.fullscreen != last_setting):
             self.play_confirm_sound()
-            last_bool = self.game.setting_value["fullscreen"]
             if self.fullscreen == "On":
-                pygame.display.toggle_fullscreen()
                 self.game.setting_value["fullscreen"] = True
             elif self.fullscreen == "Off":
-                pygame.display.toggle_fullscreen()
                 self.game.setting_value["fullscreen"] = False
 
-            # ask player to keep change and do below if player not keep
-            if self.check_confirm("Keep change?", 6) != True:
-                pygame.display.toggle_fullscreen()
-                self.game.setting_value["fullscreen"] = last_bool
-                self.fullscreen = last_setting
+            self.game.change_resolution()
             self.is_setting = False
-        
+
         # if player press escape while setting
         if actions["escape"]:
             self.play_back_sound()
