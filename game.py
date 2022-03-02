@@ -5,7 +5,6 @@ import json
 import pygame
 from states.title import Title
 
-
 class Game():
     def __init__(self) -> None:
 
@@ -59,11 +58,14 @@ class Game():
         self.clock = pygame.time.Clock()
         self.load_states()
 
+        self.user_text = ''
+
     def game_loop(self):
         while self.playing:
             self.get_dt()
             self.get_events()
             self.update()
+            
             self.render()
             self.clock.tick(self.setting_value["max_fps"])
 
@@ -74,8 +76,14 @@ class Game():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.actions["escape"] = True
-                if event.key == pygame.K_RETURN:
+                if event.key == pygame.K_BACKSPACE:
+                    self.user_text = self.user_text[:-1]
+                elif event.key == pygame.K_RETURN:
                     self.actions["enter"] = True
+                else:
+                    self.user_text += event.unicode
+                    if len(self.user_text) > 100:
+                        self.user_text = self.user_text[:-1]
                 if event.key == pygame.K_UP:
                     self.actions["up"] = True
                 if event.key == pygame.K_DOWN:

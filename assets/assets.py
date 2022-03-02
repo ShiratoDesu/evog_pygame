@@ -7,3 +7,4 @@ class Assets():
         self.sprites_dir = os.path.join(self.assets_dir, "sprites")
         self.font_dir = os.path.join(self.assets_dir, "font")
         self.sounds_dir = os.path.join(self.assets_dir, "sounds")
+        self.words_dir = os.path.join(self.assets_dir, 'words')
