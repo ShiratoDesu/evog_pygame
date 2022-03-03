@@ -38,7 +38,7 @@ class Word():
         self.meaning_rect = self.answerMeaning.get_rect(center = (self.canvas.get_width()*0.5, self.canvas.get_height()*0.5))
 
     def checkWord(self, user_text):
-        if user_text.lower() == self.word:
+        if user_text.lower().strip() == self.word:
             return True
             # self.healthbar.take_health(50)
         else:

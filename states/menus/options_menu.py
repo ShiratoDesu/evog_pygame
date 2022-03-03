@@ -20,7 +20,7 @@ class Options(Menu):
         # size, tect, color, % canvas width, % canvas height, num of setable value
         self.setted_value = (
             [7, self.fullscreen, "white", .75, .35, 2],
-            [6, self.max_fps, "white", .75, .45, 3],
+            [6, self.max_fps, "white", .75, .45, 2],
             [6, self.overall_volume, "white", .75, .55, 11],
             [6, self.music_volume, "white", .75, .65, 11],
             [6, self.effect_volume, "white", .75, .75, 11],
@@ -32,7 +32,6 @@ class Options(Menu):
         # when select choice to set
         self.is_setting = False
         self.setting_index = 0
-        self.last_setting_index = 0
         self.SETTING_OFFSET = -40
         self.setable_value = []
 
@@ -169,12 +168,11 @@ class Options(Menu):
             self.setable_value.append(value)
             if value == current_value:
                 self.setting_index = list.index(value)
-        self.last_setting_index = self.setting_index
 
     def get_setable_value(self):
         fullscreen_value = ["Off", "On"]
         max_fps_value = [30, 60]
-        volume = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]
+        volume = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
         # create fullscreen setting list
         if self.options[self.menu_index][1] == "Fullscreen":
@@ -199,18 +197,14 @@ class Options(Menu):
     # method to run when fullscreen is selected
     def fullscreen_choice(self, actions):
 
-        # get last value before changed
-        last_setting = self.setable_value[self.last_setting_index]
-
-        # set value to draw
+        # set value by index
         self.fullscreen = self.setable_value[self.setting_index]
 
-        # if player press enter to change value that not last value
-        if self.fullscreen != last_setting:
-            if self.fullscreen == "On":
-                self.game.setting_value["fullscreen"] = True
-            elif self.fullscreen == "Off":
-                self.game.setting_value["fullscreen"] = False
+        # change game setting value
+        if self.fullscreen == "On":
+            self.game.setting_value["fullscreen"] = True
+        elif self.fullscreen == "Off":
+            self.game.setting_value["fullscreen"] = False
 
         self.game.change_resolution()
 
@@ -222,17 +216,13 @@ class Options(Menu):
     # method to run when max fps is selected
     def max_fps_choice(self, actions):
 
-        # get last value before changed
-        last_setting = self.setable_value[self.last_setting_index]
-
-        # set value
+        # set value by index
         self.max_fps = self.setable_value[self.setting_index]
 
-        # if player press enter to change value that not last value
-        if self.max_fps != last_setting:
-            for value in self.setable_value:
-                if self.max_fps == value:
-                    self.game.setting_value["max_fps"] = value
+        # change game setting value
+        for value in self.setable_value:
+            if self.max_fps == value:
+                self.game.setting_value["max_fps"] = value
 
         # exit setting
         if actions["enter"] or actions["escape"]:
@@ -242,18 +232,13 @@ class Options(Menu):
     # method to run when overall volume is selected
     def overall_volume_choice(self, actions):
 
-        # get last value before changed
-        last_setting = self.setable_value[self.last_setting_index]
-
-        # set value
+        # set value by index
         self.overall_volume = self.setable_value[self.setting_index]
 
-        # if player press enter to change value that not last value
-        if self.overall_volume != last_setting:
-            for value in self.setable_value:
-                if self.overall_volume == value:
-                    self.game.setting_value["overall_sound"] = value / 20
-
+        # change game setting value
+        for value in self.setable_value:
+            if self.overall_volume == value:
+                self.game.setting_value["overall_sound"] = value / 20
         self.sound.overall_volume = self.game.setting_value["overall_sound"]
         new_volume = self.sound.overall_volume * self.sound.music_volume
         pygame.mixer.music.set_volume(new_volume)
@@ -266,18 +251,13 @@ class Options(Menu):
     # method to run when music volume is selected
     def music_volume_choice(self, actions):
 
-        # get last value before changed
-        last_setting = self.setable_value[self.last_setting_index]
-
-        # set value
+        # set value by index
         self.music_volume = self.setable_value[self.setting_index]
 
-        # if player press enter to change value that not last value
-        if self.music_volume != last_setting:
-            for value in self.setable_value:
-                if self.music_volume == value:
-                    self.game.setting_value["music_sound"] = value / 10
-
+        # change game setting value
+        for value in self.setable_value:
+            if self.music_volume == value:
+                self.game.setting_value["music_sound"] = value / 10
         self.sound.music_volume = self.game.setting_value["music_sound"]
         new_volume = self.sound.overall_volume * self.sound.music_volume
         pygame.mixer.music.set_volume(new_volume)
@@ -290,17 +270,13 @@ class Options(Menu):
     # method to run when music volume is selected
     def effect_volume_choice(self, actions):
 
-        # get last value before changed
-        last_setting = self.setable_value[self.last_setting_index]
-
-        # set value
+        # set value by index
         self.effect_volume = self.setable_value[self.setting_index]
 
-        # if player press enter to change value that not last value
-        if self.effect_volume != last_setting:
-            for value in self.setable_value:
-                if self.effect_volume == value:
-                    self.game.setting_value["effect_sound"] = value / 10
+        # change game setting value
+        for value in self.setable_value:
+            if self.effect_volume == value:
+                self.game.setting_value["effect_sound"] = value / 10
 
         self.sound.effect_volume = self.game.setting_value["effect_sound"]
 
