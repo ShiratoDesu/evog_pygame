@@ -1,6 +1,7 @@
 from tkinter import CENTER, Canvas
 import pygame
 import random
+import time
 import os
 from assets.assets import Assets
 
@@ -26,6 +27,7 @@ class Word():
     def get_new_word(self):
         self.answerWord = open(self.word_file, encoding = 'utf-8').read().splitlines()
 
+        random.seed(time.time())
         self.randNumber = random.randrange(len(self.answerWord))
         self.chosenWord = self.answerWord[self.randNumber]
         self.word = self.chosenWord.split(' ')[0]
@@ -38,7 +40,7 @@ class Word():
         self.meaning_rect = self.answerMeaning.get_rect(center = (self.canvas.get_width()*0.5, self.canvas.get_height()*0.5))
 
     def checkWord(self, user_text):
-        if user_text.lower().strip() == self.word:
+        if user_text.lower().strip(' ') == self.word:
             return True
             # self.healthbar.take_health(50)
         else:

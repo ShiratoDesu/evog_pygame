@@ -72,7 +72,7 @@ class MainMenu(Menu):
         self.sound.fadeout_music(0.5)
         self.sound.play_music(self.sound.title_theme_end, 1)
         self.game.game_delay(2)
-        new_state = GameScene(self.game)
+        new_state = GameScene(self.game, self)
         self.draw.fade_screen("white", new_state)
         new_state.enter_state()
 

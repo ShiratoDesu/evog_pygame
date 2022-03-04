@@ -26,8 +26,9 @@ class Game():
         self.DEFAULT_W, self.DEFAULT_H = 1280, 720
         self.canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         if self.setting_value["fullscreen"] == True:
-            monitor = pygame.display.Info()
-            self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
+            # monitor = pygame.display.Info()
+            # self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
+            self.SCREEN_W, self.SCREEN_H = self.DEFAULT_W, self.DEFAULT_H
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)
         else:
@@ -132,8 +133,9 @@ class Game():
 
     def change_resolution(self):
         if self.setting_value["fullscreen"] == True:
-            monitor = pygame.display.Info()
-            self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
+            # monitor = pygame.display.Info()
+            # self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
+            self.SCREEN_W, self.SCREEN_H = self.DEFAULT_W, self.DEFAULT_H
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)
         else:

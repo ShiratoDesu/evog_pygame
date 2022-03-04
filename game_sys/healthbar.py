@@ -1,7 +1,7 @@
 import pygame, sys
 
 class Healthbar(pygame.sprite.Sprite):
-    def __init__(self, canvas, health, healthbar_length):
+    def __init__(self, canvas, health, healthbar_length, position_x, position_y):
         super().__init__()
         self.canvas = canvas
         self.canvas_w, self.canvas_h = canvas.get_size()
@@ -15,6 +15,7 @@ class Healthbar(pygame.sprite.Sprite):
         self.health_bar_hieght = 10
         self.health_ratio = self.max_health / self.health_bar_length
         self.health_change_speed = 3
+        self.pos_x, self.pos_y = position_x, position_y
 
     def update(self):
         self.advanced_health()
@@ -38,22 +39,22 @@ class Healthbar(pygame.sprite.Sprite):
     def advanced_health(self):
             transition_width = 0
             transition_color = "red"
-            health_bar_rect = pygame.Rect(10,45,self.current_health / self.health_ratio, self.health_bar_hieght)
-            transition_bar_rect = pygame.Rect(health_bar_rect.right,45,transition_width, self.health_bar_hieght)
+            health_bar_rect = pygame.Rect(self.pos_x, self.pos_y, (self.current_health / self.health_ratio), self.health_bar_hieght)
+            transition_bar_rect = pygame.Rect(health_bar_rect.right, self.pos_y, transition_width, self.health_bar_hieght)
             if self.current_health < self.target_health:
                 self.current_health += self.health_change_speed
                 transition_width = int((self.target_health - self.current_health) / self.health_ratio)
                 transition_color = (0,255,0)
-                health_bar_rect = pygame.Rect(10,45,self.current_health / self.health_ratio, self.health_bar_hieght)
+                health_bar_rect = pygame.Rect(self.pos_x , self.pos_y, (self.current_health / self.health_ratio), self.health_bar_hieght)
 
             if self.current_health > self.target_health:
                 self.current_health -= self.health_change_speed 
                 transition_width = int((self.current_health - self.target_health) / self.health_ratio)
                 transition_color = "yellow"
-                health_bar_rect = pygame.Rect(10,45,self.target_health / self.health_ratio, self.health_bar_hieght)
+                health_bar_rect = pygame.Rect(self.pos_x, self.pos_y, (self.target_health / self.health_ratio), self.health_bar_hieght)
 
-            transition_bar_rect = pygame.Rect(health_bar_rect.right,45,transition_width, self.health_bar_hieght)
+            transition_bar_rect = pygame.Rect(health_bar_rect.right, self.pos_y, transition_width, self.health_bar_hieght)
             
             pygame.draw.rect(self.canvas,(255,0,0),health_bar_rect) 
             pygame.draw.rect(self.canvas,transition_color,transition_bar_rect)	
-            pygame.draw.rect(self.canvas,(255,255,255),(10,45,self.health_bar_length, self.health_bar_hieght),1)	
+            pygame.draw.rect(self.canvas, (255,255,255), (self.pos_x, self.pos_y, self.health_bar_length, self.health_bar_hieght), 1)	
