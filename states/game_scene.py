@@ -13,11 +13,11 @@ class GameScene(State):
         State.__init__(self, game)
         self.assets = Assets()
         self.player = Player(self.CANVAS_W * 0.2, self.CANVAS_H * 0.75)
-        self.demo_monster = DemoMonster(self.CANVAS_W * 0.8, self.CANVAS_H * 0.75)
+        self.demo_monster = DemoMonster(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8)
         self.word_file = os.path.join(self.assets.words_dir, 'engmix.txt')
         self.word = Word(self.canvas, self.word_file)
         self.player_hp = Healthbar(self.canvas, self.player.hp, self.player.hp_bar_lenght, 40, 45)
-        self.demo_monster_hp = Healthbar(self.canvas, self.demo_monster.hp, self.demo_monster.hp_bar_lenght, 280 - self.demo_monster.hp_bar_lenght,45)
+        self.demo_monster_hp = Healthbar(self.canvas, self.demo_monster.hp, self.demo_monster.hp_bar_lenght, 300 - self.demo_monster.hp_bar_lenght,45)
         self.timer = Time()
         self.main_menu = main_menu
 

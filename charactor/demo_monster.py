@@ -11,7 +11,7 @@ class DemoMonster(pygame.sprite.Sprite):
         self.sprite = Sprites()
         
         self.current_sprite = 0
-        self.image = self.sprite.knight[self.current_sprite]
+        self.image = self.sprite.demo_monster[self.current_sprite]
         self.rect = self.image.get_rect()
         self.rect.center = [pos_x, pos_y]
         self.idle_animation = False
@@ -30,7 +30,7 @@ class DemoMonster(pygame.sprite.Sprite):
             if int(self.current_sprite) >= len(self.sprite.demo_monster):
                 self.current_sprite = 0
 
-        self.image = self.sprite.knight[int(self.current_sprite)]
+        self.image = self.sprite.demo_monster[int(self.current_sprite)]
 
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):
