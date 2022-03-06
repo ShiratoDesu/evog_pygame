@@ -6,6 +6,7 @@ from game_sys.healthbar import Healthbar
 from game_sys.timer import Time
 from assets.assets import Assets
 import os
+import time
 
 
 class GameScene(State):
@@ -13,11 +14,14 @@ class GameScene(State):
         State.__init__(self, game)
         self.assets = Assets()
         self.player = Player(self.CANVAS_W * 0.2, self.CANVAS_H * 0.75)
-        self.demo_monster = DemoMonster(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8)
+        self.demo_monster = DemoMonster(
+            self.CANVAS_W * 0.8, self.CANVAS_H * 0.8)
         self.word_file = os.path.join(self.assets.words_dir, 'engmix.txt')
         self.word = Word(self.canvas, self.word_file)
-        self.player_hp = Healthbar(self.canvas, self.player.hp, self.player.hp_bar_lenght, 40, 45)
-        self.demo_monster_hp = Healthbar(self.canvas, self.demo_monster.hp, self.demo_monster.hp_bar_lenght, 300 - self.demo_monster.hp_bar_lenght,45)
+        self.player_hp = Healthbar(
+            self.canvas, self.player.hp, self.player.hp_bar_lenght, 40, 45)
+        self.demo_monster_hp = Healthbar(
+            self.canvas, self.demo_monster.hp, self.demo_monster.hp_bar_lenght, 300 - self.demo_monster.hp_bar_lenght, 45)
         self.timer = Time()
         self.main_menu = main_menu
 
@@ -30,15 +34,18 @@ class GameScene(State):
         self.demo_idle = False
         self.word.get_new_word()
         self.timer.setTimeMarker()
+        self.timer.reset_start_time()
 
     def update(self, delta_time, actions):
         self.player_idle = True
         self.demo_idle = True
         self.player_hp.advanced_health()
         self.demo_monster_hp.advanced_health()
+        self.timer.get_elapsed_time()
         if actions['escape']:
-            
-            #exit to main menu
+            start_pause = time.time()
+
+            # exit to main menu
             if self.main_menu.check_confirm('Exit to Menu?', 7):
                 while len(self.game.state_stack) > 2:
                     self.exit_state()
@@ -47,6 +54,8 @@ class GameScene(State):
                     self.sound.play_music(self.sound.title_theme)
             else:
                 self.game.user_text = self.game.user_text[:-1]
+                pause_time = time.time() - start_pause
+                self.timer.start_time += pause_time
         if actions['enter']:
             if self.game.user_text.lower().strip(' ') == 'gg':
                 self.player_hp.take_health(self.player_hp.max_health)
@@ -55,12 +64,13 @@ class GameScene(State):
                 self.word.get_new_word()
                 self.timer.getTimeDiff()
                 self.timer.setTimeMarker()
+                self.timer.reset_start_time()
                 self.player_hp.take_health(self.player.heal)
                 self.demo_monster_hp.take_damage(self.player.atk)
             else:
                 self.player_hp.take_damage(self.demo_monster.atk)
             self.game.user_text = ''
-            
+        self.pause_time = 0
 
     def render(self, surface):
 
@@ -72,3 +82,6 @@ class GameScene(State):
         # surface.blit(self.word.answer, self.word.answer_rect)
         self.demo_monster_hp.update()
         self.player_hp.update()
+
+        # render time count
+        self.draw.draw_text(6, int(self.timer.elasped_time), 'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.1)
