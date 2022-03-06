@@ -14,7 +14,7 @@ class Healthbar(pygame.sprite.Sprite):
         self.health_bar_length = healthbar_length
         self.health_bar_hieght = 10
         self.health_ratio = self.max_health / self.health_bar_length
-        self.health_change_speed = 3
+        self.health_change_speed = 1
         self.pos_x, self.pos_y = position_x, position_y
 
     def update(self):

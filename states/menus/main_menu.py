@@ -75,6 +75,8 @@ class MainMenu(Menu):
         new_state = GameScene(self.game, self)
         self.draw.fade_screen("white", new_state)
         new_state.enter_state()
+        new_state.timer.reset_start_time()
+        new_state.timer.reset_last_ticks()
 
     def enter_options_menu(self):
         self.play_confirm_sound()

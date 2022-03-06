@@ -23,6 +23,7 @@ class Word():
         self.input_space = pygame.Rect(canvas.get_width()/2, canvas.get_height()/2, 0, 20)
         # self.input_space.center = (canvas.get_width()/2, canvas.get_height()*0.3)
         self.input_space.center
+        self.word_correct_count = 0
 
     def get_new_word(self):
         self.answerWord = open(self.word_file, encoding = 'utf-8').read().splitlines()
@@ -41,11 +42,10 @@ class Word():
 
     def checkWord(self, user_text):
         if user_text.lower().strip(' ') == self.word:
+            self.word_correct_count += 1
             return True
-            # self.healthbar.take_health(50)
         else:
             return False
-            # self.healthbar.take_damage(100)
 
     def renderInputBox(self, color, userText):
 
@@ -57,3 +57,6 @@ class Word():
         self.input_space.w = max(self.canvas.get_width()/4, text_surface.get_width() + 10)
 
         self.input_space.center = (((self.canvas.get_width()/2)), self.canvas.get_height()*0.8)
+
+    def reset_word_count(self):
+        self.word_correct_count = 0

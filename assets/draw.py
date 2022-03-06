@@ -1,4 +1,5 @@
 import os
+from pickle import TRUE
 import pygame
 from assets.assets import Assets
 
@@ -16,12 +17,14 @@ class Draw(Assets):
     def load_font(self):
         self.main_font = os.path.join(self.font_dir, "PressStart2P-vaV7.ttf")
 
-    def draw_text(self, size, text, color, x, y, center=True):
+    def draw_text(self, size, text, color, x, y, center=True, rightSide=False):
         font = pygame.font.Font(self.main_font, size)
         text_surface = font.render(str(text), self.anti_aliasing, color)
         text_rect = text_surface.get_rect()
         if center == True:
             text_rect.center = (x, y)
+        elif rightSide == True:
+            text_rect.midright = (x,y)
         else:
             text_rect.midleft = (x, y)
         self.canvas.blit(text_surface, text_rect)
