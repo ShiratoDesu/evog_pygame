@@ -19,7 +19,8 @@ class State():
         self.sprites = Sprites()
 
     def update(self, delta_time, actions):
-        pass
+        self.sound.update_volume(
+            self.game.setting_value["overall_sound"], self.game.setting_value["music_sound"], self.game.setting_value["effect_sound"])
 
     def render(self, surface):
         pass

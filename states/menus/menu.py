@@ -12,13 +12,13 @@ class Menu(State):
             "left": False
         }
         self._box_text = [
-            [6, "Yes", "black", -20, 10],
-            [6, "No", "black", 20, 10]
+            [6, "Yes", "gray", -20, 10],
+            [6, "No", "gray", 20, 10]
         ]
         self._cursor_index = 0
 
     def update(self, delta_time, actions):
-        pass
+        super().update(delta_time, actions)
 
     def render(self, surface):
         pass
@@ -45,7 +45,7 @@ class Menu(State):
         need_confirm = True
         confirm = False
         self._box_text[0][0] += 2
-        self._box_text[0][2] = "red"
+        self._box_text[0][2] = "black"
         self._cursor_index = 0
         while need_confirm:
             self._get_event()
@@ -70,11 +70,11 @@ class Menu(State):
         middle_x, middle_y = self.CANVAS_W / 2, self.CANVAS_H / 2
         # draw box
         box = pygame.Surface((100, 60))
-        box.fill("gray")
+        box.fill("white")
         box_rect = box.get_rect(center=(middle_x, middle_y))
         self.canvas.blit(box, box_rect)
         # draw text
-        self.draw.draw_text(size, header_text, "yellow",
+        self.draw.draw_text(size, header_text, "black",
                             middle_x, middle_y - 10)
         for choice in self._box_text:
             self.draw.draw_text(
@@ -103,9 +103,9 @@ class Menu(State):
             self.play_cursor_sound()
         for choice in self._box_text:
             choice[0] = 6
-            choice[2] = "black"
+            choice[2] = "gray"
         self._box_text[self._cursor_index][0] += 2
-        self._box_text[self._cursor_index][2] = "red"
+        self._box_text[self._cursor_index][2] = "black"
 
     def _reset_key(self):
         for action in self._box_actions:

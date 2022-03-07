@@ -19,6 +19,7 @@ class MainMenu(Menu):
         self.CURSOR_OFFSET = 40
 
     def update(self, delta_time, actions):
+        super().update(delta_time, actions)
         self.update_cursor(actions)
         if actions["enter"]:
             self.transition_state()
@@ -73,6 +74,7 @@ class MainMenu(Menu):
         self.sound.play_music(self.sound.title_theme_end, 1)
         self.game.game_delay(2)
         new_state = GameScene(self.game, self)
+        self.game.reset_user_text()
         self.draw.fade_screen("white", new_state)
         new_state.enter_state()
         new_state.timer.reset_start_time()

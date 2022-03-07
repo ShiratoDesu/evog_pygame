@@ -37,6 +37,7 @@ class Options(Menu):
 
     # update game value
     def update(self, delta_time, actions):
+        super().update(delta_time, actions)
         self.update_setted_value()
 
         # when select choice to set

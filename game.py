@@ -143,6 +143,9 @@ class Game():
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H))
         self.render()
+    
+    def reset_user_text(self):
+        self.user_text = ''
 
     def exit_game(self):
         self.save_data()

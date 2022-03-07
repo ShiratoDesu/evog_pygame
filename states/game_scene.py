@@ -38,13 +38,14 @@ class GameScene(State):
         self.timer.reset_start_time()
 
     def update(self, delta_time, actions):
+        super().update(delta_time, actions)
         self.player_idle = True
         self.demo_idle = True
         self.player_hp.advanced_health()
         self.demo_monster_hp.advanced_health()
         self.timer.get_elapsed_time()
         if actions['escape']:
-            start_pause = time.time()
+            self.timer.pause_timer()
 
             # exit to main menu
             if self.main_menu.check_confirm('Exit to Menu?', 7):
@@ -55,8 +56,7 @@ class GameScene(State):
                     self.sound.play_music(self.sound.title_theme)
             else:
                 self.game.user_text = self.game.user_text[:-1]
-                pause_time = time.time() - start_pause
-                self.timer.start_time += pause_time
+                self.timer.unpause_timer()
         if actions['enter']:
             if self.game.user_text.lower().strip() == 'gg':
                 self.player_hp.take_health(self.player_hp.max_health)
@@ -65,18 +65,22 @@ class GameScene(State):
                 self.word.get_new_word()
                 self.player_hp.take_health(self.player.heal)
                 self.demo_monster_hp.take_damage(self.player.atk)
+                self.sound.play_sound(self.sound.player_atk_sound)
 
             else:
-                self.player_hp.take_damage(self.demo_monster.atk)
+                self.demo_monster_hp.take_health(self.demo_monster.heal)
+                self.sound.play_sound(self.sound.heal_sound)
             self.game.user_text = ''
-        self.pause_time = 0
 
         if self.timer.get_time_diff(5000):
                 self.player_hp.take_damage(self.demo_monster.atk)
+                self.sound.play_sound(self.sound.demo_atk_sound)
         
         if self.player_hp.current_health <= 0 or self.demo_monster_hp.current_health <= 0:
             new_state = EndScreen(self.game, self.timer.elasped_time, self.word.word_correct_count, self.player_hp.current_health, self.main_menu)
             new_state.enter_state()
+            self.sound.fadeout_music(1)
+            self.sound.play_music(self.sound.begin_theme_end, 1)
             
     def render(self, surface):
 

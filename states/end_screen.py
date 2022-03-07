@@ -16,11 +16,13 @@ class EndScreen(State):
             self.score = int((count * 100) + (remaining_health * 10) - (time * 5))
 
     def update(self, delta_time, actions):
+        super().update(delta_time, actions)
         if actions['enter']:
             while len(self.game.state_stack) > 2:
                 self.exit_state()
-                self.sound.fadeout_music(1)
             self.draw.fade_screen('black', self.main_menu, 200)
+            self.sound.fadeout_music(1)
+            self.sound.play_music(self.sound.title_theme)
 
     def render(self, surface):
         surface.fill('black')

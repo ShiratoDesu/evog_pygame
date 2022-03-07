@@ -19,6 +19,17 @@ class Time():
         if now - self.last >= cooldown:
             self.last = now
             return True
+        print(now - self.last)
 
     def reset_last_ticks(self):
         self.last = pygame.time.get_ticks()
+
+    def pause_timer(self):
+        self.start_pause = time.time()
+        self.start_tick_pause = pygame.time.get_ticks()
+    
+    def unpause_timer(self):
+        pause_time = time.time() - self.start_pause
+        self.start_time += pause_time
+        self.last += (pygame.time.get_ticks() - self.start_tick_pause)
+

@@ -36,6 +36,9 @@ class Sound(Assets):
         self.back_sound = os.path.join(self.effects_dir, "back.ogg")
         self.back_echo_sound = os.path.join(self.effects_dir, "back_echo.ogg")
         self.error_sound = os.path.join(self.effects_dir, "error.ogg")
+        self.player_atk_sound = os.path.join(self.effects_dir, "hit_3.wav")
+        self.demo_atk_sound = os.path.join(self.effects_dir, "hit_2.wav")
+        self.heal_sound = os.path.join(self.effects_dir, 'heal.wav')
 
     def play_music(self, music_path, time=-1):
         volume = self.overall_volume * self.music_volume
@@ -54,3 +57,8 @@ class Sound(Assets):
         sound_effect = pygame.mixer.Sound(sound_path)
         sound_effect.set_volume(volume)
         sound_effect.play()
+    
+    def update_volume(self, overall_volume, music_volume, effect_volume):
+        self.overall_volume = overall_volume
+        self.music_volume = music_volume
+        self.effect_volume = effect_volume
