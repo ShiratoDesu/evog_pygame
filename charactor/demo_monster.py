@@ -36,7 +36,6 @@ class DemoMonster(pygame.sprite.Sprite):
     def draw_sprite(self, screen, animation):
         self.moving_monster_sprites.draw(screen)
         self.moving_monster_sprites.update(0.25, animation)
-
     
     def add_monster(self):
         self.moving_monster_sprites = pygame.sprite.Group()

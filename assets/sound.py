@@ -62,3 +62,7 @@ class Sound(Assets):
         self.overall_volume = overall_volume
         self.music_volume = music_volume
         self.effect_volume = effect_volume
+
+    def change_music(self, music_path, fadeout_sec, time=-1):
+        self.fadeout_music(fadeout_sec)
+        self.play_music(music_path, time)
