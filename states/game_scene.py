@@ -41,6 +41,7 @@ class GameScene(State):
 
         # set timer
         self.timer = Time()
+        
         self.timer.reset_start_time()
 
         # play new music
