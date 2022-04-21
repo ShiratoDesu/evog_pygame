@@ -3,13 +3,14 @@ from assets.sound import Sound
 from assets.sprites import Sprites
 
 class Randomdice(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, overall_volume, music_volume, effect_volume):
+    def __init__(self, pos_x, pos_y, sound):
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
+        self.atk_sound = sound.random_dice_atk_sound
 
         self.sprite = Sprites()
-        self.sound = Sound(overall_volume, music_volume, effect_volume)
+        self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
         self.attacking = False
         self.hitted = False
         

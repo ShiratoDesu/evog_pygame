@@ -47,8 +47,12 @@ class Sound(Assets):
         self.back_sound = os.path.join(self.effects_dir, "back.ogg")
         self.back_echo_sound = os.path.join(self.effects_dir, "back_echo.ogg")
         self.error_sound = os.path.join(self.effects_dir, "error.ogg")
-        self.player_atk_sound = os.path.join(self.effects_dir, "hit_3.wav")
-        self.demo_atk_sound = os.path.join(self.effects_dir, "hit_2.wav")
+        self.player_atk_sound = os.path.join(self.effects_dir, "knight_attack.wav")
+        self.shadow_atk_sound = os.path.join(self.effects_dir, "shadow_attack.wav")
+        self.little_ghost_atk_sound = os.path.join(self.effects_dir, "little_ghost_attack.wav")
+        self.random_dice_atk_sound = os.path.join(self.effects_dir, "random_dice_attack.wav") 
+        self.mrcube_atk_sound = os.path.join(self.effects_dir, "mrcube_attack.wav")
+        self.smile_banana_atk_sound = os.path.join(self.effects_dir, "smile_banana_attack.wav")
         self.heal_sound = os.path.join(self.effects_dir, 'heal.wav')
 
     def play_music(self, music_path, time=-1):

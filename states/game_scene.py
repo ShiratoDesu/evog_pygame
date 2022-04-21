@@ -23,16 +23,14 @@ class GameScene(State):
 
         # player and monster object
         self.player = Player(self.CANVAS_W * 0.2, self.CANVAS_H * 0.75)
-        self.monster_list = [Mrcube(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8),
-                             Littleghost(self.CANVAS_W * 0.8,
-                                         self.CANVAS_H * 0.8),
-                             Smilebanana(self.CANVAS_W * 0.8,
-                                         self.CANVAS_H * 0.8)]
-        self.boss_list = [Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
-                          Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
-                          Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
-                          Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
-                          Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume)]
+        self.monster_list = [Mrcube(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound),
+                             Littleghost(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound),
+                             Smilebanana(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound)]
+        self.boss_list = [Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound),
+                          Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound),
+                          Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound),
+                          Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound),
+                          Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound)]
         self.boss_theme_list = [self.sound.icy_cave_loop,
                                 self.sound.mysterious,
                                 self.sound.prepare_for_battle_loop,
@@ -150,7 +148,7 @@ class GameScene(State):
                 self.monster.attack()
                 self.player.get_hitted()
                 self.player_hp.take_damage(self.monster.atk)
-                self.sound.play_sound(self.sound.demo_atk_sound)
+                self.sound.play_sound(self.monster.atk_sound)
 
         # player dead go to end screen show score
         if self.player_hp.target_health <= 0:

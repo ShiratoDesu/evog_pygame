@@ -4,10 +4,11 @@ import sys
 from assets.sprites import Sprites
 
 class Smilebanana(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y):
+    def __init__(self, pos_x, pos_y, sound):
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
+        self.atk_sound = sound.smile_banana_atk_sound
 
         self.sprite = Sprites()
         self.attacking = False
