@@ -23,18 +23,31 @@ class GameScene(State):
 
         # player and monster object
         self.player = Player(self.CANVAS_W * 0.2, self.CANVAS_H * 0.75)
-        self.monster_list = [Mrcube(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
-                            Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
-                            Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
-                            Littleghost(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
-                            Smilebanana(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8)
-        ]
+        self.monster_list = [Mrcube(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8),
+                             Littleghost(self.CANVAS_W * 0.8,
+                                         self.CANVAS_H * 0.8),
+                             Smilebanana(self.CANVAS_W * 0.8,
+                                         self.CANVAS_H * 0.8)]
+        self.boss_list = [Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
+                          Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
+                          Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
+                          Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume),
+                          Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8, self.sound.overall_volume, self.sound.music_volume, self.sound.effect_volume)]
+        self.boss_theme_list = [self.sound.icy_cave_loop,
+                                self.sound.mysterious,
+                                self.sound.prepare_for_battle_loop,
+                                self.sound.exploring_the_unknown_loop,
+                                self.sound.decisive_battle_loop]
+        self.background_list = ['black', 'red', 'green', 'blue', 'gray']
+
+        self.current_monster = 1
+        self.boss_index = 0
+        self.background_index = 0
 
 ## DemoMonster(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8 )
 
-        # random monster from monster list
-        random.seed(time.time())
-        self.monster = random.choice(self.monster_list)
+        # random monster from monster list and boss
+        self.spawn_boss_and_monster()
 
         # set player and monster hp bar
         self.player_hp = Healthbar(
@@ -42,14 +55,19 @@ class GameScene(State):
         self.monster_hp = Healthbar(
             self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45)
 
-        # add player and monster to screen and set idle animation
+        # set idle animation
         self.player_idle = False
         self.monster_idle = False
-        self.monster_attacking = False
 
         # get first word and answer
-        self.word_file = os.path.join(self.assets.words_dir, 'engmix.txt')
-        self.word = Word(self.canvas, self.word_file)
+        self.word_file = [os.path.join(self.assets.words_dir, 'engmix_lv1.txt'),
+                          os.path.join(self.assets.words_dir, 'engmix_lv2.txt'),
+                          os.path.join(self.assets.words_dir, 'engmix_lv3.txt'),
+                          os.path.join(self.assets.words_dir, 'engmix_lv4.txt'),
+                          os.path.join(self.assets.words_dir, 'engmix_lv5.txt')]
+        self.current_word_file = 0
+        self.word_correct = 0
+        self.word = Word(self.canvas, self.word_file[self.current_word_file])
         self.word.get_new_word()
 
         # set timer
@@ -63,6 +81,7 @@ class GameScene(State):
 
         self.main_menu = main_menu
         self.monster_visible = True
+        self.boss_killed = False
 
     def update(self, delta_time, actions):
         super().update(delta_time, actions)
@@ -115,6 +134,9 @@ class GameScene(State):
             if self.monster_hp.target_health <= 0:
                 self.timer.reset_last_ticks()
                 self.monster_visible = False
+                self.monster.killed()
+                if ((self.current_monster - 1) % 10) == 0:
+                    self.boss_killed = True
 
             # reset input user_text
             self.game.user_text = ''
@@ -124,7 +146,6 @@ class GameScene(State):
             if self.timer.get_time_diff(5000):
 
                 # monster attack
-                self.monster_attacking = True
                 self.monster.attack()
                 self.player_hp.take_damage(self.monster.atk)
                 self.sound.play_sound(self.sound.demo_atk_sound)
@@ -132,7 +153,7 @@ class GameScene(State):
         # player dead go to end screen show score
         if self.player_hp.target_health <= 0:
             new_state = EndScreen(self.game, self.timer.elasped_time,
-                                  self.word.word_correct_count, self.player_hp.target_health, self.main_menu)
+                                  self.word_correct, self.player_hp.target_health, self.main_menu)
             new_state.enter_state()
             self.sound.change_music(self.sound.begin_theme_end, 1, 1)
 
@@ -142,12 +163,31 @@ class GameScene(State):
             # cooldown 1.5 second before spawn new monster
             if self.timer.get_time_diff(1500):
 
+                if self.boss_killed:
+                    # keep all word correct count
+                    self.word_correct += self.word.word_correct_count
+                    self.word.reset_word_count()
+
+                    # change background and word index
+                    self.background_index += 1
+                    self.current_word_file += 1
+
+                    # check if word file and bakcground index out of range
+                    if self.current_word_file >= len(self.word_file):
+                        self.current_word_file = len(self.word_file) - 1
+                    if self.background_index >= len(self.background_list):
+                        self.background_index = len(self.background_list) - 1
+                    
+                    # get new word instance and new world
+                    self.word = Word(self.canvas, self.word_file[self.current_word_file])
+                    self.word.get_new_word()
+                    self.boss_killed = False
+
                 # random choice from monster list
-                random.seed(time.time())
-                self.monster = random.choice(self.monster_list)
+                self.spawn_boss_and_monster()
                 self.monster_hp = Healthbar(
                     self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45)
-                ## self.monster.add_monster()
+                # self.monster.add_monster()
                 self.monster_visible = True
                 self.game.reset_user_text()
                 self.timer.reset_last_ticks()
@@ -155,7 +195,7 @@ class GameScene(State):
     def render(self, surface):
 
         # fill background
-        surface.fill((0, 0, 0))
+        surface.fill(self.background_list[self.background_index])
 
         # draw player sprite
         self.player.draw_sprite(surface, self.player_idle)
@@ -188,3 +228,29 @@ class GameScene(State):
             self.monster_hp.update()
             self.draw.draw_text(8, self.monster.name,
                                 'white', 300, 37, False, True)
+
+    def spawn_boss_and_monster(self):
+        random.seed(time.time())
+        if (self.current_monster % 10) == 0 and self.boss_index < len(self.boss_list):
+            
+            # check boss index to play intro
+            if self.boss_index == 2:
+                self.sound.change_music(self.sound.prepare_for_battle_intro, 1, 1)
+                self.sound.queue_music(self.boss_theme_list[self.boss_index])
+            elif self.boss_index == 3:
+                self.sound.change_music(self.sound.exploring_the_unknown_intro, 1, 1)
+                self.sound.queue_music(self.boss_theme_list[self.boss_index])
+            else:
+                self.sound.change_music(self.boss_theme_list[self.boss_index], 1)
+            
+            self.monster = self.boss_list[self.boss_index]
+            self.boss_index += 1
+        elif self.boss_index >= len(self.boss_list):
+            self.boss_index = 0
+            new_state = EndScreen(self.game, self.timer.elasped_time,
+                                  self.word_correct, self.player_hp.target_health, self.main_menu)
+            new_state.enter_state()
+            self.sound.change_music(self.sound.begin_theme_end, 1, 1)
+        else:
+            self.monster = random.choice(self.monster_list)
+        self.current_monster += 1

@@ -18,7 +18,8 @@ class Game():
             "max_fps": 60,
             "overall_sound": 0.5,
             "music_sound": 1,
-            "effect_sound": 1
+            "effect_sound": 1,
+            "high_score" : 0
         }
         self.load_saved()
 

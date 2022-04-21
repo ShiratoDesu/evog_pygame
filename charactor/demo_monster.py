@@ -16,13 +16,11 @@ class DemoMonster(pygame.sprite.Sprite):
         self.rect.center = [pos_x, pos_y]
         self.idle_animation = False
 
-        self.profile = open('charactor/demo_monster.txt',encoding = 'utf-8').read().splitlines()
-
-        self.name = self.profile[0]
-        self.hp = int(self.profile[1])
-        self.hp_bar_lenght = int(self.profile[2])
-        self.atk = int(self.profile[3])
-        self.heal = int(self.profile[4])
+        self.name = '????'
+        self.hp = 100
+        self.hp_bar_lenght = 70
+        self.atk = 25
+        self.heal = 100
 
     def update(self, speed, animation=False):
         if animation == True:

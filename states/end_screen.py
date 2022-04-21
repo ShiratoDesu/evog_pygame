@@ -14,6 +14,10 @@ class EndScreen(State):
             self.score = 0
         if remaining_health > 0 or count > 0:
             self.score = int((count * 100) + (remaining_health * 10) - (time * 5))
+        
+        # check high score and save
+        if self.score > self.game.setting_value["high_score"]:
+            self.game.setting_value["high_score"] = self.score
 
     def update(self, delta_time, actions):
         super().update(delta_time, actions)
@@ -27,7 +31,8 @@ class EndScreen(State):
     def render(self, surface):
         surface.fill('black')
         self.draw.draw_text(12, 'GAME END' , 'white', self.CANVAS_W/2, self.CANVAS_H*0.2)
-        self.draw.draw_text(10, 'Score : ' + str(self.score) , 'white', self.CANVAS_W/2, self.CANVAS_H*0.5)
+        self.draw.draw_text(10, 'Score : ' + str(self.score) , 'white', self.CANVAS_W/2, self.CANVAS_H*0.35)
+        self.draw.draw_text(9, 'High score : ' + str(self.game.setting_value["high_score"]), 'white', self.CANVAS_W/2, self.CANVAS_H*0.5)
         self.draw.draw_text(8, 'Correct words : ' + str(self.count) , 'white', self.CANVAS_W/2, self.CANVAS_H*0.6)
         self.draw.draw_text(8, 'Time used : ' + str(self.time) + ' s', 'white', self.CANVAS_W/2, self.CANVAS_H*0.7)
         self.draw.draw_text(7, 'Press Enter to main menu' , 'white', self.CANVAS_W/2, self.CANVAS_H*0.9)

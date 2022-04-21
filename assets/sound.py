@@ -27,6 +27,17 @@ class Sound(Assets):
             self.bg_musics_dir, "JourneyBeginsLoop.wav")
         self.begin_theme_end = os.path.join(
             self.bg_musics_dir, "JourneyBeginsEnd.wav")
+        self.icy_cave_loop = os.path.join(self.bg_musics_dir, "TheIcyCaveLoop.wav")
+        self.icy_cave_end = os.path.join(self.bg_musics_dir, "TheIcyCaveEnd.wav")
+        self.mysterious = os.path.join(self.bg_musics_dir, "MysteriousDungeon.wav")
+        self.prepare_for_battle_intro = os.path.join(self.bg_musics_dir, "PrepareForBattleIntro.wav")
+        self.prepare_for_battle_loop = os.path.join(self.bg_musics_dir, "PrepareForBattleLoop.wav")
+        self.prepare_for_battle_end = os.path.join(self.bg_musics_dir, "PrepareForBattleEnd.wav")
+        self.exploring_the_unknown_intro = os.path.join(self.bg_musics_dir, "ExploringTheUnknownIntro.wav")
+        self.exploring_the_unknown_loop = os.path.join(self.bg_musics_dir, "ExploringTheUnknownLoop.wav")
+        self.exploring_the_unknown_end = os.path.join(self.bg_musics_dir, "ExploringTheUnknownEnd.wav")
+        self.decisive_battle_loop = os.path.join(self.bg_musics_dir, "DecisiveBattleLoop.wav")
+        self.decisive_battle_end = os.path.join(self.bg_musics_dir, "DecisiveBattleEnd.wav")
 
     def load_sounds_effects(self):
         self.cursor_sound = os.path.join(self.effects_dir, "cursor.ogg")

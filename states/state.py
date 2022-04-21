@@ -12,9 +12,9 @@ class State():
         self.canvas = game.canvas
         self.screen = game.screen
 
-        self.sound = Sound(game.setting_value["overall_sound"],
-                           game.setting_value["music_sound"],
-                           game.setting_value["effect_sound"])
+        self.sound = Sound(self.game.setting_value["overall_sound"],
+                           self.game.setting_value["music_sound"],
+                           self.game.setting_value["effect_sound"])
         self.draw = Draw(self.canvas, self.screen)
         self.sprites = Sprites()
 

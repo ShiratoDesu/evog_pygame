@@ -1,15 +1,15 @@
-from pickle import FALSE
 import pygame
-import sys
+from assets.sound import Sound 
 from assets.sprites import Sprites
 
 class Randomdice(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y):
+    def __init__(self, pos_x, pos_y, overall_volume, music_volume, effect_volume):
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
 
         self.sprite = Sprites()
+        self.sound = Sound(overall_volume, music_volume, effect_volume)
         self.attacking = False
         
         self.current_sprite = 0
@@ -45,6 +45,14 @@ class Randomdice(pygame.sprite.Sprite):
     def attack(self):
         self.current_sprite = 0
         self.attacking = True
+
+# Reset animation after killed
+    def killed(self):
+        self.current_sprite = 0
+        self.attacking = False
+        self.image = self.sprite.randomdice_list_idle[int(self.current_sprite)]
+        self.sound.change_music(self.sound.icy_cave_end, 1, 1)
+        self.sound.queue_music(self.sound.begin_theme_loop)
 
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):

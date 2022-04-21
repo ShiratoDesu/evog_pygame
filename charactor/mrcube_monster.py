@@ -1,6 +1,4 @@
-from pickle import FALSE
 import pygame
-import sys
 from assets.sprites import Sprites
 
 class Mrcube(pygame.sprite.Sprite):
@@ -42,9 +40,14 @@ class Mrcube(pygame.sprite.Sprite):
             self.image = self.sprite.mrcube_list_idle[int(self.current_sprite)]
 
     def attack(self):
-        print("ATTACK!!")
         self.current_sprite = 0
         self.attacking = True
+
+# Reset animation after killed
+    def killed(self):
+        self.current_sprite = 0
+        self.attacking = False
+        self.image = self.sprite.mrcube_list_idle[int(self.current_sprite)]
 
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):

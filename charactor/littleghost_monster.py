@@ -46,6 +46,12 @@ class Littleghost(pygame.sprite.Sprite):
         self.current_sprite = 0
         self.attacking = True
 
+# Reset animation after killed
+    def killed(self):
+        self.current_sprite = 0
+        self.attacking = False
+        self.image = self.sprite.littleghost_list_idle[int(self.current_sprite)]
+
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):
         screen.blit(self.image, (225,100))
