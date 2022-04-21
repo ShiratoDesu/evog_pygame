@@ -1,3 +1,8 @@
+from charactor.littleghost_monster import Littleghost
+from charactor.mrcube_monster import Mrcube
+from charactor.randomdice_monster import Randomdice
+from charactor.shadowman_monster import Shadowman
+from charactor.smilebanana_monster import Smilebanana
 from states.state import State
 from charactor.player import Player
 from charactor.demo_monster import DemoMonster
@@ -15,24 +20,32 @@ class GameScene(State):
     def __init__(self, game, main_menu) -> None:
         State.__init__(self, game)
         self.assets = Assets()
-        
+
         # player and monster object
         self.player = Player(self.CANVAS_W * 0.2, self.CANVAS_H * 0.75)
-        self.monster_list = [ DemoMonster(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8 ) ]      
+        self.monster_list = [Mrcube(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
+                            Shadowman(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
+                            Randomdice(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
+                            Littleghost(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8), 
+                            Smilebanana(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8)
+        ]
+
+## DemoMonster(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8 )
 
         # random monster from monster list
         random.seed(time.time())
         self.monster = random.choice(self.monster_list)
 
         # set player and monster hp bar
-        self.player_hp = Healthbar(self.canvas, self.player.hp, self.player.hp_bar_lenght, 20, 45)
-        self.monster_hp = Healthbar(self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45)
+        self.player_hp = Healthbar(
+            self.canvas, self.player.hp, self.player.hp_bar_lenght, 20, 45)
+        self.monster_hp = Healthbar(
+            self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45)
 
         # add player and monster to screen and set idle animation
-        self.player.add_player()
-        self.monster.add_monster()
         self.player_idle = False
         self.monster_idle = False
+        self.monster_attacking = False
 
         # get first word and answer
         self.word_file = os.path.join(self.assets.words_dir, 'engmix.txt')
@@ -41,7 +54,7 @@ class GameScene(State):
 
         # set timer
         self.timer = Time()
-        
+
         self.timer.reset_start_time()
 
         # play new music
@@ -84,9 +97,10 @@ class GameScene(State):
             if self.game.user_text.lower().strip() == 'gg':
                 self.player_hp.take_health(self.player_hp.max_health)
 
-            ## check player word
+            # check player word
             # get new word and heal player monster take dmg
             if self.word.checkWord(self.game.user_text):
+                self.player.attack()
                 self.word.get_new_word()
                 self.player_hp.take_health(self.player.heal)
                 self.monster_hp.take_damage(self.player.atk)
@@ -110,12 +124,15 @@ class GameScene(State):
             if self.timer.get_time_diff(5000):
 
                 # monster attack
+                self.monster_attacking = True
+                self.monster.attack()
                 self.player_hp.take_damage(self.monster.atk)
                 self.sound.play_sound(self.sound.demo_atk_sound)
-        
+
         # player dead go to end screen show score
         if self.player_hp.target_health <= 0:
-            new_state = EndScreen(self.game, self.timer.elasped_time, self.word.word_correct_count, self.player_hp.target_health, self.main_menu)
+            new_state = EndScreen(self.game, self.timer.elasped_time,
+                                  self.word.word_correct_count, self.player_hp.target_health, self.main_menu)
             new_state.enter_state()
             self.sound.change_music(self.sound.begin_theme_end, 1, 1)
 
@@ -124,16 +141,17 @@ class GameScene(State):
 
             # cooldown 1.5 second before spawn new monster
             if self.timer.get_time_diff(1500):
-            
+
                 # random choice from monster list
                 random.seed(time.time())
                 self.monster = random.choice(self.monster_list)
-                self.monster_hp = Healthbar(self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45)
-                self.monster.add_monster()
+                self.monster_hp = Healthbar(
+                    self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45)
+                ## self.monster.add_monster()
                 self.monster_visible = True
                 self.game.reset_user_text()
                 self.timer.reset_last_ticks()
-            
+
     def render(self, surface):
 
         # fill background
@@ -156,7 +174,8 @@ class GameScene(State):
         self.render_name_and_helath()
 
         # render time count
-        self.draw.draw_text(6, int(self.timer.elasped_time), 'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.1)
+        self.draw.draw_text(6, int(self.timer.elasped_time),
+                            'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.1)
 
     def render_name_and_helath(self):
 
@@ -167,5 +186,5 @@ class GameScene(State):
         # draw monster name and heath bar
         if self.monster_visible == True:
             self.monster_hp.update()
-            self.draw.draw_text(8, self.monster.name, 'white', 300, 37, False, True)
-
+            self.draw.draw_text(8, self.monster.name,
+                                'white', 300, 37, False, True)

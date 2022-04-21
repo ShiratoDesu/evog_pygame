@@ -32,6 +32,7 @@ class DemoMonster(pygame.sprite.Sprite):
 
         self.image = self.sprite.demo_monster[int(self.current_sprite)]
 
+
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):
         self.moving_monster_sprites.draw(screen)

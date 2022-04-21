@@ -16,7 +16,7 @@ class Time():
 
     def get_time_diff(self, cooldown):
         now = pygame.time.get_ticks()
-        print(now - self.last)
+        ## print(now - self.last)
         if now - self.last >= cooldown:
             self.last = now
             return True
