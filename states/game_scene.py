@@ -120,6 +120,7 @@ class GameScene(State):
             # get new word and heal player monster take dmg
             if self.word.checkWord(self.game.user_text):
                 self.player.attack()
+                self.monster.get_hitted()
                 self.word.get_new_word()
                 self.player_hp.take_health(self.player.heal)
                 self.monster_hp.take_damage(self.player.atk)
@@ -147,6 +148,7 @@ class GameScene(State):
 
                 # monster attack
                 self.monster.attack()
+                self.player.get_hitted()
                 self.player_hp.take_damage(self.monster.atk)
                 self.sound.play_sound(self.sound.demo_atk_sound)
 

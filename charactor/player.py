@@ -15,6 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = [pos_x, pos_y]
         self.attacking = False
+        self.hitted = False
 
         self.name = 'Sir.Evog'
         self.hp = 100
@@ -41,15 +42,22 @@ class Player(pygame.sprite.Sprite):
             self.image = self.sprite.knight_list_idle[int(self.current_sprite)]
 
     def attack(self):
-        print("ATTACK!!")
         self.current_sprite = 0
         self.attacking = True
 
+    def get_hitted(self):
+        self.hitted = True
+
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):
-        sprite_rect = self.image.get_rect()
-        sprite_rect.center = (self.pos_x,self.pos_y)
-        screen.blit(self.image, sprite_rect)
+        if self.attacking:
+            self.rect.center = (self.pos_x + 5, self.pos_y)
+        elif self.hitted:
+            self.rect.center = (self.pos_x - 5, self.pos_y)
+            self.hitted = False
+        else:
+            self.rect.center = (self.pos_x, self.pos_y)
+        screen.blit(self.image, self.rect)
         self.update(0.25, animation)
 
     

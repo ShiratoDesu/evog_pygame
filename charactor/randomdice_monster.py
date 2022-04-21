@@ -11,6 +11,7 @@ class Randomdice(pygame.sprite.Sprite):
         self.sprite = Sprites()
         self.sound = Sound(overall_volume, music_volume, effect_volume)
         self.attacking = False
+        self.hitted = False
         
         self.current_sprite = 0
         self.image = self.sprite.randomdice_list_idle[self.current_sprite]
@@ -45,6 +46,9 @@ class Randomdice(pygame.sprite.Sprite):
     def attack(self):
         self.current_sprite = 0
         self.attacking = True
+    
+    def get_hitted(self):
+        self.hitted = True
 
 # Reset animation after killed
     def killed(self):
@@ -56,7 +60,14 @@ class Randomdice(pygame.sprite.Sprite):
 
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):
-        screen.blit(self.image, (225,100))
+        if self.attacking:
+            self.rect = (225 - 5, 100)
+        elif self.hitted:
+            self.rect = (225 + 5, 100)
+            self.hitted = False
+        else:
+            self.rect = (225, 100)
+        screen.blit(self.image, self.rect)
         self.update(0.25, animation)
     
     #def add_monster(self):
