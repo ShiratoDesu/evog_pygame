@@ -41,6 +41,11 @@ class Sprites(Assets):
         self.shadowman_sprite_idle = os.listdir(self.shadowman_idle_dir)
         self.littleghost_sprite_idle = os.listdir(self.littleghost_idle_dir)
         self.smilebanana_sprite_idle = os.listdir(self.smilebanana_idle_dir)
+        self.amongus_sprite_idle = os.listdir(self.amongus_idle_dir)
+        self.madsoldier_sprite_idle = os.listdir(self.madsoldier_idle_dir)
+        self.forestenergy_sprite_idle = os.listdir(self.forestenergy_idle_dir)
+        self.archer_sprite_idle = os.listdir(self.archer_idle_dir)
+        self.darkknight_sprite_idle = os.listdir(self.darkknight_idle_dir)
 
         self.mrcube_sprite_atk = os.listdir(self.mrcube_atk_dir)
         self.randomdice_sprite_atk = os.listdir(self.randomdice_atk_dir)
@@ -48,6 +53,11 @@ class Sprites(Assets):
         self.littleghost_sprite_atk = os.listdir(self.littleghost_atk_dir)
         self.smilebanana_sprite_atk = os.listdir(self.smilebanana_atk_dir)
         self.knight_sprite_atk = os.listdir(self.knight_atk_dir)
+        self.amongus_sprite_atk = os.listdir(self.amongus_atk_dir)
+        self.madsoldier_sprite_atk = os.listdir(self.madsoldier_atk_dir)
+        self.forestenergy_sprite_atk = os.listdir(self.forestenergy_atk_dir)
+        self.archer_sprite_atk = os.listdir(self.archer_atk_dir)
+        self.darkknight_sprite_atk = os.listdir(self.darkknight_atk_dir)
         
         # define list
         self.knight_list_idle = []
