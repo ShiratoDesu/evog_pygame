@@ -11,6 +11,11 @@ class Sprites(Assets):
         self.shadowman_idle_dir = os.path.join(self.sprites_dir, 'shadowman_idle')
         self.littleghost_idle_dir = os.path.join(self.sprites_dir, 'littleghost_idle')
         self.smilebanana_idle_dir = os.path.join(self.sprites_dir, 'smilebanana_idle')
+        self.amongus_idle_dir = os.path.join(self.sprites_dir, 'amongus_idle')
+        self.madsoldier_idle_dir = os.path.join(self.sprites_dir, 'madsoldier_idle')
+        self.forestenergy_idle_dir = os.path.join(self.sprites_dir, 'forestenergy_idle')
+        self.archer_idle_dir = os.path.join(self.sprites_dir, 'archer_idle')
+        self.darkknight_idle_dir = os.path.join(self.sprites_dir, 'darkknight_idle')
 
         self.knight_atk_dir = os.path.join(self.sprites_dir, 'knight_atk')
         self.mrcube_atk_dir = os.path.join(self.sprites_dir, 'mrcube_atk')
@@ -18,6 +23,11 @@ class Sprites(Assets):
         self.shadowman_atk_dir = os.path.join(self.sprites_dir, 'shadowman_atk')
         self.littleghost_atk_dir = os.path.join(self.sprites_dir, 'littleghost_atk')
         self.smilebanana_atk_dir = os.path.join(self.sprites_dir, 'smilebanana_atk')
+        self.amongus_atk_dir = os.path.join(self.sprites_dir, 'amongus_atk')
+        self.madsoldier_atk_dir = os.path.join(self.sprites_dir, 'madsoldier_atk')
+        self.forestenergy_atk_dir = os.path.join(self.sprites_dir, 'forestenergy_atk')
+        self.archer_atk_dir = os.path.join(self.sprites_dir, 'archer_atk')
+        self.darkknight_atk_dir = os.path.join(self.sprites_dir, 'darkknight_atk')
 
         self.demo_monster_idle_dir = os.path.join(self.sprites_dir, 'demo_idle')
         self.load_sprites()
@@ -48,6 +58,11 @@ class Sprites(Assets):
         self.littleghost_list_idle = []
         self.smilebanana_list_idle = []
         self.shadowman_list_idle = []
+        self.amongus_list_idle = []
+        self.madsoldier_list_idle = []
+        self.forestenergy_list_idle = []
+        self.archer_list_idle = []
+        self.darkknight_list_idle = []
 
         self.knight_list_atk = []
         self.mrcube_list_atk = []
@@ -55,6 +70,11 @@ class Sprites(Assets):
         self.littleghost_list_atk = []
         self.smilebanana_list_atk = []
         self.shadowman_list_atk = []
+        self.amongus_list_atk = []
+        self.madsoldier_list_atk = []
+        self.forestenergy_list_atk = []
+        self.archer_list_atk = []
+        self.darkknight_list_atk = []
         
         # loop for load image to list
         # idle list
@@ -94,6 +114,33 @@ class Sprites(Assets):
             if mrcube_idle.endswith('.png'):
                 dir = os.path.join(self.mrcube_idle_dir, mrcube_idle)
                 self.mrcube_list_idle.append(pygame.image.load(dir))
+        
+        for amongus_idle in self.amongus_idle_dir[:]:
+            if amongus_idle.endswith('.png'):
+                dir = os.path.join(self.amongus_idle_dir, amongus_idle)
+                self.amongus_list_idle.append(pygame.image.load(dir))
+
+        for madsoldier_idle in self.madsoldier_idle_dir[:]:
+                if madsoldier_idle.endswith('.png'):
+                    dir = os.path.join(self.madsoldier_idle_dir, madsoldier_idle)
+                    self.madsoldier_list_idle.append(pygame.image.load(dir))
+
+        for forestenergy_idle in self.forestenergy_idle_dir[:]:
+                if forestenergy_idle.endswith('.png'):
+                    dir = os.path.join(self.forestenergy_idle_dir, forestenergy_idle)
+                    self.forestenergy_list_idle.append(pygame.image.load(dir))
+
+        for archer_idle in self.archer_idle_dir[:]:
+                if archer_idle.endswith('.png'):
+                    dir = os.path.join(self.archer_idle_dir, archer_idle)
+                    self.archer_list_idle.append(pygame.image.load(dir))
+
+        for darkknight_idle in self.darkknight_idle_dir[:]:
+            if darkknight_idle.endswith('.png'):
+                dir = os.path.join(self.darkknight_idle_dir, darkknight_idle)
+                image = pygame.image.load(dir)
+                image_filp = pygame.transform.flip(image,True,False)
+                self.darkknight_list_idle.append(image_filp)
 
         # atk list
         for knight_atk in self.knight_sprite_atk[:]:
@@ -125,3 +172,30 @@ class Sprites(Assets):
             if smilebanana_atk.endswith('.png'):
                 dir = os.path.join(self.smilebanana_atk_dir, smilebanana_atk)
                 self.smilebanana_list_atk.append(pygame.image.load(dir))
+
+        for amongus_atk in self.amongus_atk_dir[:]:
+            if amongus_atk.endswith('.png'):
+                dir = os.path.join(self.amongus_atk_dir, amongus_atk)
+                self.amongus_list_atk.append(pygame.image.load(dir))
+
+        for madsoldier_atk in self.madsoldier_atk_dir[:]:
+                if madsoldier_atk.endswith('.png'):
+                    dir = os.path.join(self.madsoldier_atk_dir, madsoldier_atk)
+                    self.madsoldier_list_atk.append(pygame.image.load(dir))
+
+        for forestenergy_atk in self.forestenergy_atk_dir[:]:
+                if forestenergy_atk.endswith('.png'):
+                    dir = os.path.join(self.forestenergy_atk_dir, forestenergy_atk)
+                    self.forestenergy_list_atk.append(pygame.image.load(dir))
+
+        for archer_atk in self.archer_atk_dir[:]:
+                if archer_atk.endswith('.png'):
+                    dir = os.path.join(self.archer_atk_dir, archer_atk)
+                    self.archer_list_atk.append(pygame.image.load(dir))
+
+        for darkknight_atk in self.darkknight_atk_dir[:]:
+            if darkknight_atk.endswith('.png'):
+                dir = os.path.join(self.darkknight_atk_dir, darkknight_atk)
+                image = pygame.image.load(dir)
+                image_filp = pygame.transform.flip(image,True,False)
+                self.darkknight_list_atk.append(image_filp)
