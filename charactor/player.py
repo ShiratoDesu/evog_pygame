@@ -21,7 +21,7 @@ class Player():
         self.hp = 100
         self.hp_bar_lenght = 70
         self.atk = 25
-        self.heal = 5
+        self.heal = 10
 
     def update(self, speed, animation=False):
         if self.attacking == True:

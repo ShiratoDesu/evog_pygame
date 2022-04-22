@@ -132,7 +132,7 @@ class GameScene(State):
 
             # check player word
             # get new word and heal player monster take dmg
-            if self.word.checkWord(self.game.user_text) and self.monster_hp.target_health > 0:
+            if self.word.checkWord(self.game.user_text) and (self.monster_hp.target_health > 0):
                 self.player.attack()
                 self.monster.get_hitted()
                 self.player_hp.take_health(self.player.heal)
@@ -156,7 +156,7 @@ class GameScene(State):
             self.game.user_text = ''
 
         # check if monster dead and player attack animation is end
-        if self.monster_hp.target_health <= 0 and self.monster_visible and self.player.attacking == False:
+        if (self.monster_hp.target_health <= 0) and self.monster_visible and (self.player.attacking == False):
             self.timer.reset_last_ticks()
             self.monster_visible = False
 
@@ -210,7 +210,6 @@ class GameScene(State):
                 self.spawn_boss_and_monster()
                 self.monster_hp = Healthbar(
                     self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45, True)
-                # self.monster.add_monster()
                 self.monster_visible = True
                 self.game.reset_user_text()
                 self.timer.reset_last_ticks()
@@ -230,6 +229,7 @@ class GameScene(State):
 
             # render and show input box
             self.word.renderInputBox('white', self.game.user_text)
+            self.draw.draw_text(6, '<Answer Force>', 'yellow', self.CANVAS_W * 0.5, self.CANVAS_H * 0.7)
 
             # show meaning to screen
             surface.blit(self.word.answerMeaning, self.word.meaning_rect)
@@ -283,4 +283,8 @@ class GameScene(State):
             self.sound.change_music(self.sound.begin_theme_end, 1, 1)
         else:
             self.monster = random.choice(self.monster_list)
+
+            # killed for animation attack bug fix
+            self.monster.killed()
+
         self.current_monster += 1
