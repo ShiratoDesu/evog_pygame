@@ -1,4 +1,3 @@
-from tkinter import CENTER, Canvas
 import pygame
 import random
 import time

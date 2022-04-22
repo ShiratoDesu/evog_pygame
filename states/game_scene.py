@@ -35,7 +35,7 @@ class GameScene(State):
                                 self.sound.mysterious,
                                 self.sound.prepare_for_battle_loop,
                                 self.sound.exploring_the_unknown_loop,
-                                self.sound.decisive_battle_loop]
+                                self.sound.amogus_drip]
         self.background_list = ['black', 'red', 'green', 'blue', 'gray']
 
         self.current_monster = 1

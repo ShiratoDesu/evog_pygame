@@ -9,7 +9,7 @@ class Game():
     def __init__(self) -> None:
 
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        pygame.mixer.pre_init(44100, -16, 2, 512)
+        # pygame.mixer.pre_init(44100, -16, 2, 512)
         pygame.init()
         pygame.display.set_caption("Evog")
 

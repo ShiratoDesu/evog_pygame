@@ -1,5 +1,4 @@
 import os
-from pickle import TRUE
 import pygame
 from assets.assets import Assets
 
