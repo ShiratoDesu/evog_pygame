@@ -2,7 +2,7 @@ import pygame
 import sys
 from assets.sprites import Sprites
 
-class Player(pygame.sprite.Sprite):
+class Player():
     def __init__(self, pos_x, pos_y):
         super().__init__()
         self.pos_x = pos_x

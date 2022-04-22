@@ -3,7 +3,7 @@ import pygame
 import sys
 from assets.sprites import Sprites
 
-class Littleghost(pygame.sprite.Sprite):
+class Littleghost():
     def __init__(self, pos_x, pos_y, sound):
         super().__init__()
         self.pos_x = pos_x

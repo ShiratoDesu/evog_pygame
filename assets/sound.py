@@ -38,6 +38,7 @@ class Sound(Assets):
         self.exploring_the_unknown_end = os.path.join(self.bg_musics_dir, "ExploringTheUnknownEnd.wav")
         self.decisive_battle_loop = os.path.join(self.bg_musics_dir, "DecisiveBattleLoop.wav")
         self.decisive_battle_end = os.path.join(self.bg_musics_dir, "DecisiveBattleEnd.wav")
+        self.the_final_of_the_fantasy = os.path.join(self.bg_musics_dir, "TheFinalofTheFantasy.wav")
 
     def load_sounds_effects(self):
         self.cursor_sound = os.path.join(self.effects_dir, "cursor.ogg")

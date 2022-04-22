@@ -3,7 +3,7 @@ import pygame
 from assets.sound import Sound 
 from assets.sprites import Sprites
 
-class Shadowman(pygame.sprite.Sprite):
+class Shadowman():
     def __init__(self, pos_x, pos_y, sound):
         super().__init__()
         self.pos_x = pos_x

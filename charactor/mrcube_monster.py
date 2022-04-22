@@ -1,7 +1,7 @@
 import pygame
 from assets.sprites import Sprites
 
-class Mrcube(pygame.sprite.Sprite):
+class Mrcube():
     def __init__(self, pos_x, pos_y, sound):
         super().__init__()
         self.pos_x = pos_x

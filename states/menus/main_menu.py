@@ -1,3 +1,4 @@
+from states.credits import Credits
 from states.game_scene import GameScene
 from states.menus.menu import Menu
 from states.menus.options_menu import Options
@@ -64,7 +65,7 @@ class MainMenu(Menu):
         elif self.menus[self.menu_index][1] == "Options":
             self.enter_options_menu()
         elif self.menus[self.menu_index][1] == "Credits":
-            self.play_error_sound()
+            self.enter_credits()
         elif self.menus[self.menu_index][1] == "Exit":
             self.play_confirm_sound()
             self.exit_game()
@@ -84,6 +85,12 @@ class MainMenu(Menu):
         self.play_confirm_sound()
         new_state = Options(self.game)
         self.draw.fade_screen("black", new_state, 100)
+        new_state.enter_state()
+    
+    def enter_credits(self):
+        self.play_confirm_sound()
+        new_state = Credits(self.game)
+        self.draw.fade_screen('black', new_state, 100)
         new_state.enter_state()
 
     def exit_game(self):

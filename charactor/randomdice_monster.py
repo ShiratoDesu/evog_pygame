@@ -2,7 +2,7 @@ import pygame
 from assets.sound import Sound 
 from assets.sprites import Sprites
 
-class Randomdice(pygame.sprite.Sprite):
+class Randomdice():
     def __init__(self, pos_x, pos_y, sound):
         super().__init__()
         self.pos_x = pos_x
