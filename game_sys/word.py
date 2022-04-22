@@ -48,6 +48,7 @@ class Word():
 
     def renderInputBox(self, color, userText):
 
+        pygame.draw.rect(self.canvas, 'black', self.input_space)
         pygame.draw.rect(self.canvas, color, self.input_space, 1)
 
         text_surface = self.font_small.render(userText, False, (255, 255, 255))

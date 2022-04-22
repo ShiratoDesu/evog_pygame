@@ -1,4 +1,3 @@
-from pickle import FALSE
 import pygame
 from assets.sound import Sound 
 from assets.sprites import Sprites
@@ -8,7 +7,7 @@ class Darkknight():
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.atk_sound = sound.shadow_atk_sound
+        self.atk_sound = sound.player_atk_sound
 
         self.sprite = Sprites()
         self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
@@ -21,10 +20,11 @@ class Darkknight():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Dark Knight'
-        self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
-        self.heal = 10
+        self.hp = 625
+        self.hp_bar_lenght = 130
+        self.atk = 50
+        self.heal = 25
+        self.atk_cd = 7000
 
     def update(self, speed, animation=False):
         if self.attacking == True:
@@ -57,7 +57,8 @@ class Darkknight():
         self.current_sprite = 0
         self.attacking = False
         self.image = self.sprite.darkknight_list_idle[int(self.current_sprite)]
-        self.sound.change_music(self.sound.begin_theme_loop, 1)
+        self.sound.change_music(self.sound.exploring_the_unknown_end, 1, 1)
+        self.sound.queue_music(self.sound.begin_theme_loop)
 
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):

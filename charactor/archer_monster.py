@@ -1,4 +1,3 @@
-from pickle import FALSE
 import pygame
 from assets.sound import Sound 
 from assets.sprites import Sprites
@@ -8,7 +7,7 @@ class Archer():
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.atk_sound = sound.shadow_atk_sound
+        self.atk_sound = sound.archer_atk_sound
 
         self.sprite = Sprites()
         self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
@@ -21,10 +20,11 @@ class Archer():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Skeleton Archer'
-        self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
+        self.hp = 75
+        self.hp_bar_lenght = 70
+        self.atk = 40
         self.heal = 10
+        self.atk_cd = 6000
 
     def update(self, speed, animation=False):
         if self.attacking == True:

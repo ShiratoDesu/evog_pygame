@@ -1,4 +1,5 @@
-import pygame
+import random
+import time
 from assets.sound import Sound 
 from assets.sprites import Sprites
 
@@ -20,10 +21,11 @@ class Randomdice():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Random Dice'
-        self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
+        self.hp = 500
+        self.hp_bar_lenght = 120
+        self.atk = 10
         self.heal = 10
+        self.atk_cd = 5000
 
     def update(self, speed, animation=False):
         if self.attacking == True:
@@ -46,17 +48,22 @@ class Randomdice():
 
     def attack(self):
         self.current_sprite = 0
+        random.seed(time.time())
+        self.atk = random.randrange(1, 50)
+        self.atk_cd = random.randrange(3000, 6000)
         self.attacking = True
     
     def get_hitted(self):
         self.hitted = True
+        random.seed(time.time())
+        self.heal = random.randrange(10, 50)
 
 # Reset animation after killed
     def killed(self):
         self.current_sprite = 0
         self.attacking = False
         self.image = self.sprite.randomdice_list_idle[int(self.current_sprite)]
-        self.sound.change_music(self.sound.icy_cave_end, 1, 1)
+        self.sound.change_music(self.sound.prepare_for_battle_end, 1, 1)
         self.sound.queue_music(self.sound.begin_theme_loop)
 
 # Creating the sprites and groups

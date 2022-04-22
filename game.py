@@ -85,7 +85,7 @@ class Game():
                     self.actions["enter"] = True
                 else:
                     self.user_text += event.unicode
-                    if len(self.user_text) > 100:
+                    if len(self.user_text) > 13:
                         self.user_text = self.user_text[:-1]
                 if event.key == pygame.K_UP:
                     self.actions["up"] = True

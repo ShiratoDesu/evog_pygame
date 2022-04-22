@@ -21,10 +21,11 @@ class Shadowman():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Shadowman'
-        self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
-        self.heal = 10
+        self.hp = 375
+        self.hp_bar_lenght = 110
+        self.atk = 15
+        self.heal = 1
+        self.atk_cd = 3000
 
     def update(self, speed, animation=False):
         if self.attacking == True:

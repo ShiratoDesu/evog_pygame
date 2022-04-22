@@ -1,14 +1,13 @@
-from pickle import FALSE
 import pygame
 from assets.sound import Sound 
 from assets.sprites import Sprites
 
-class Amongus():
+class Amogus():
     def __init__(self, pos_x, pos_y, sound):
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.atk_sound = sound.shadow_atk_sound
+        self.atk_sound = sound.amogus_atk_sound
 
         self.sprite = Sprites()
         self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
@@ -20,11 +19,12 @@ class Amongus():
         self.rect = self.image.get_rect()
         self.rect.center = [pos_x, pos_y]
 
-        self.name = 'Amongus'
-        self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
-        self.heal = 10
+        self.name = 'Amogus'
+        self.hp = 750
+        self.hp_bar_lenght = 140
+        self.atk = 33
+        self.heal = 50
+        self.atk_cd = 4000
 
     def update(self, speed, animation=False):
         if self.attacking == True:

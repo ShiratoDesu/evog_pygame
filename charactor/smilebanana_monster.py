@@ -20,10 +20,11 @@ class Smilebanana():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Smile Banana'
-        self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
-        self.heal = 10
+        self.hp = 60
+        self.hp_bar_lenght = 70
+        self.atk = 20
+        self.heal = 1
+        self.atk_cd = 4000
 
     def update(self, speed, animation=False):
         if self.attacking == True:

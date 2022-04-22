@@ -8,7 +8,7 @@ class Forestenergy():
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.atk_sound = sound.shadow_atk_sound
+        self.atk_sound = sound.forest_energy_atk_sound
 
         self.sprite = Sprites()
         self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
@@ -21,10 +21,11 @@ class Forestenergy():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Forest Energy'
-        self.hp = 100
+        self.hp = 250
         self.hp_bar_lenght = 100
-        self.atk = 5
-        self.heal = 10
+        self.atk = 20
+        self.heal = 75
+        self.atk_cd = 5000
 
     def update(self, speed, animation=False):
         if self.attacking == True:
@@ -57,6 +58,8 @@ class Forestenergy():
         self.current_sprite = 0
         self.attacking = False
         self.image = self.sprite.forestenergy_list_idle[int(self.current_sprite)]
+        self.sound.change_music(self.sound.icy_cave_end, 1, 1)
+        self.sound.queue_music(self.sound.begin_theme_loop)
 
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):

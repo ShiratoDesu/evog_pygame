@@ -20,10 +20,11 @@ class Littleghost():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Little Ghost'
-        self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
-        self.heal = 10
+        self.hp = 175
+        self.hp_bar_lenght = 70
+        self.atk = 15
+        self.heal = 1
+        self.atk_cd = 5000
 
     def update(self, speed, animation=False):
         if self.attacking == True:

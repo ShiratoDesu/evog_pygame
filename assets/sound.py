@@ -55,6 +55,10 @@ class Sound(Assets):
         self.random_dice_atk_sound = os.path.join(self.effects_dir, "random_dice_attack.wav") 
         self.mrcube_atk_sound = os.path.join(self.effects_dir, "mrcube_attack.wav")
         self.smile_banana_atk_sound = os.path.join(self.effects_dir, "smile_banana_attack.wav")
+        self.archer_atk_sound = os.path.join(self.effects_dir, 'archer_attack.wav')
+        self.mad_soldier_atk_sound = os.path.join(self.effects_dir, 'mad_soldier_attack.wav')
+        self.forest_energy_atk_sound = os.path.join(self.effects_dir, 'forest_energy_attack.wav')
+        self.amogus_atk_sound = os.path.join(self.effects_dir, 'amogus_attack.wav')
         self.heal_sound = os.path.join(self.effects_dir, 'heal.wav')
 
     def play_music(self, music_path, time=-1):

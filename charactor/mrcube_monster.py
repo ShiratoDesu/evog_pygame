@@ -18,10 +18,11 @@ class Mrcube():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Mr.cube'
-        self.hp = 100
-        self.hp_bar_lenght = 100
+        self.hp = 150
+        self.hp_bar_lenght = 70
         self.atk = 5
-        self.heal = 10
+        self.heal = 20
+        self.atk_cd = 2000
 
     def update(self, speed, animation=False):
         if self.attacking == True:

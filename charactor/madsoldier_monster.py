@@ -8,7 +8,7 @@ class Madsoldier():
         super().__init__()
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.atk_sound = sound.shadow_atk_sound
+        self.atk_sound = sound.mad_soldier_atk_sound
 
         self.sprite = Sprites()
         self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
@@ -22,9 +22,10 @@ class Madsoldier():
 
         self.name = 'Mad soldier'
         self.hp = 100
-        self.hp_bar_lenght = 100
-        self.atk = 5
-        self.heal = 10
+        self.hp_bar_lenght = 70
+        self.atk = 10
+        self.heal = 15
+        self.atk_cd = 3000
 
     def update(self, speed, animation=False):
         if self.attacking == True:
