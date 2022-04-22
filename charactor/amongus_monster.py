@@ -57,7 +57,6 @@ class Amongus():
         self.current_sprite = 0
         self.attacking = False
         self.image = self.sprite.amongus_list_idle[int(self.current_sprite)]
-        self.sound.change_music(self.sound.begin_theme_loop, 1)
 
 # Creating the sprites and groups
     def draw_sprite(self, screen, animation):
