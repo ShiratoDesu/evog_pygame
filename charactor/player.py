@@ -23,17 +23,18 @@ class Player():
         self.atk = 25
         self.heal = 10
 
-    def update(self, speed, animation=False):
+    def update(self, speed, dt, animation=False):
+        adj_speed = speed * dt * 60
         if self.attacking == True:
             self.image = self.sprite.knight_list_atk[int(self.current_sprite)]
-            self.current_sprite += speed
+            self.current_sprite += adj_speed
 
             if int(self.current_sprite) >= len(self.sprite.knight_list_atk):
                 self.current_sprite = 0
                 self.attacking = False
 
         elif animation == True:
-            self.current_sprite += speed
+            self.current_sprite += adj_speed
 
             if int(self.current_sprite) >= len(self.sprite.knight_list_idle):
                 self.current_sprite = 0
@@ -49,7 +50,7 @@ class Player():
         self.hitted = True
 
 # Creating the sprites and groups
-    def draw_sprite(self, screen, animation):
+    def draw_sprite(self, screen, animation, dt):
         if self.attacking:
             self.rect.center = (self.pos_x + 5, self.pos_y)
         elif self.hitted:
@@ -58,7 +59,7 @@ class Player():
         else:
             self.rect.center = (self.pos_x, self.pos_y)
         screen.blit(self.image, self.rect)
-        self.update(0.25, animation)
+        self.update(0.25, dt, animation)
 
     
     # def add_player(self):

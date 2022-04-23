@@ -24,24 +24,24 @@ class Credits(State):
         self.draw.draw_text(10, 'Credits', 'yellow', self.CANVAS_W * 0.5, self.CANVAS_H * 0.1)
         
         # developer list 
-        self.draw.draw_text(8, 'Developer :', 'yellow', self.CANVAS_W * 0.05, self.CANVAS_H * 0.25, center = False)
-        self.draw.draw_text(8, 'Sirawit Pawano', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.325, center = False)
-        self.draw.draw_text(8, 'Yannawat Somon', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.400, center = False)
+        self.draw.draw_text(8, 'Developer :', 'yellow', self.CANVAS_W * 0.05, self.CANVAS_H * 0.25, 'left')
+        self.draw.draw_text(8, 'Sirawit Pawano', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.325, 'left')
+        self.draw.draw_text(8, 'Yannawat Somon', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.400, 'left')
 
         # musics credit
-        self.draw.draw_text(8, 'Musics by :', 'yellow', self.CANVAS_W * 0.05, self.CANVAS_H * 0.50, center = False)
-        self.draw.draw_text(8, 'xDeviruchi', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.575, center = False)
-        self.draw.draw_text(8, 'MrTrololow', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.650, center = False)
+        self.draw.draw_text(8, 'Musics by :', 'yellow', self.CANVAS_W * 0.05, self.CANVAS_H * 0.50, 'left')
+        self.draw.draw_text(8, 'xDeviruchi', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.575, 'left')
+        self.draw.draw_text(8, 'MrTrololow', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.650, 'left')
 
         # sound fx credit
-        self.draw.draw_text(8, 'Sound FX by :', 'yellow', self.CANVAS_W * 0.475, self.CANVAS_H * 0.25, center = False)
-        self.draw.draw_text(8, 'ObsydianX', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.325, center = False)
-        self.draw.draw_text(8, 'lulyc', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.400, center = False)
-        self.draw.draw_text(8, 'Mixkit', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.475, center = False)
-        self.draw.draw_text(8, 'Bfxr program', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.550, center = False)
-        self.draw.draw_text(6, 'LittleRobotSoundFactory', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.625, center = False)
+        self.draw.draw_text(8, 'Sound FX by :', 'yellow', self.CANVAS_W * 0.475, self.CANVAS_H * 0.25, 'left')
+        self.draw.draw_text(8, 'ObsydianX', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.325, 'left')
+        self.draw.draw_text(8, 'lulyc', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.400, 'left')
+        self.draw.draw_text(8, 'Mixkit', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.475, 'left')
+        self.draw.draw_text(8, 'Bfxr program', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.550, 'left')
+        self.draw.draw_text(6, 'LittleRobotSoundFactory', 'white', self.CANVAS_W * 0.525, self.CANVAS_H * 0.625, 'left')
 
         # adviser list
-        self.draw.draw_text(8, 'Adviser :', 'yellow', self.CANVAS_W * 0.05, self.CANVAS_H * 0.75, center = False)
-        self.draw.draw_text(7, 'Asst. Prof. Dr.Pattarawit Polpinit', 'white', self.CANVAS_W * 0.07, self.CANVAS_H * 0.82, center = False)
-        self.draw.draw_text(7, 'Assoc. Prof. Dr.Kanda Runapongsa Saikaew', 'white', self.CANVAS_W * 0.07, self.CANVAS_H * 0.89, center = False)
+        self.draw.draw_text(8, 'Adviser :', 'yellow', self.CANVAS_W * 0.05, self.CANVAS_H * 0.75, 'left')
+        self.draw.draw_text(7, 'Asst. Prof. Dr.Pattarawit Polpinit', 'white', self.CANVAS_W * 0.07, self.CANVAS_H * 0.82, 'left')
+        self.draw.draw_text(7, 'Assoc. Prof. Dr.Kanda Runapongsa Saikaew', 'white', self.CANVAS_W * 0.07, self.CANVAS_H * 0.89, 'left')

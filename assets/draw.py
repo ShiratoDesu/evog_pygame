@@ -16,20 +16,20 @@ class Draw(Assets):
     def load_font(self):
         self.main_font = os.path.join(self.font_dir, "PressStart2P-vaV7.ttf")
 
-    def draw_text(self, size, text, color, x, y, center=True, rightSide=False):
+    def draw_text(self, size, text, color, x, y, align = 'center'):
         font = pygame.font.Font(self.main_font, size)
-        text_surface = font.render(str(text), self.anti_aliasing, color)
+        text_surface = font.render(str(text), self.anti_aliasing, color).convert_alpha()
         text_rect = text_surface.get_rect()
-        if center == True:
+        if align == 'center':
             text_rect.center = (x, y)
-        elif rightSide == True:
+        elif align == 'right':
             text_rect.midright = (x,y)
-        else:
+        elif align == 'left':
             text_rect.midleft = (x, y)
         self.canvas.blit(text_surface, text_rect)
 
     def fade_screen(self, color, state, fade_time=200):
-        fade_canvas = pygame.Surface((self.canvas_w, self.canvas_h))
+        fade_canvas = pygame.Surface((self.canvas_w, self.canvas_h)).convert_alpha()
         opacity = 0
         fade_canvas.fill(color)
         for i in range(0, fade_time):

@@ -21,8 +21,9 @@ class Healthbar(pygame.sprite.Sprite):
         self.pos_x, self.pos_y = position_x, position_y
         self.reverse = reverse
 
-    def update(self):
-        self.advanced_health()
+    def update(self, dt):
+        adj_health_change_speed = self.health_change_speed * dt * 60
+        self.advanced_health(adj_health_change_speed)
 
     def take_damage(self, amount):
         if self.target_health > 0:
@@ -40,7 +41,7 @@ class Healthbar(pygame.sprite.Sprite):
     #     pygame.draw.rect(self.canvas, (255,0,0), (10, 10, self.target_health/self.health_ratio, 25))
     #     pygame.draw.rect(self.canvas, (255,255,255), (10, 10, self.health_bar_length, 25), 2)
 
-    def advanced_health(self):
+    def advanced_health(self, change_speed):
         transition_width = 0
         transition_color = "red"
 
@@ -58,7 +59,7 @@ class Healthbar(pygame.sprite.Sprite):
 
         # healing
         if self.current_health < self.target_health:
-            self.current_health += self.health_change_speed
+            self.current_health += change_speed
             transition_width = int(
                 (self.target_health - self.current_health) / self.health_ratio)
             transition_color = (0, 255, 0)
@@ -71,7 +72,7 @@ class Healthbar(pygame.sprite.Sprite):
 
         # damaged
         if self.current_health > self.target_health:
-            self.current_health -= self.health_change_speed
+            self.current_health -= change_speed
             transition_width = int(
                 (self.current_health - self.target_health) / self.health_ratio)
             transition_color = "yellow"

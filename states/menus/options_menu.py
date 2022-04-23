@@ -11,19 +11,19 @@ class Options(Menu):
 
         # size, text, color, % canvas width, % canvas height
         self.options = (
-            [7, "Fullscreen", "white", .20, .35],
-            [6, "Max FPS", "white", .20, .45],
-            [6, "Overall volume", "white", .20, .55],
-            [6, "Music volume", "white", .20, .65],
-            [6, "Effect volume", "white", .20, .75],
+            [8, "Fullscreen", "white", .20, .35],
+            [7, "Max FPS", "white", .20, .45],
+            [7, "Overall volume", "white", .20, .55],
+            [7, "Music volume", "white", .20, .65],
+            [7, "Effect volume", "white", .20, .75],
         )
         # size, tect, color, % canvas width, % canvas height, num of setable value
         self.setted_value = (
-            [7, self.fullscreen, "white", .75, .35, 2],
-            [6, self.max_fps, "white", .75, .45, 2],
-            [6, self.overall_volume, "white", .75, .55, 11],
-            [6, self.music_volume, "white", .75, .65, 11],
-            [6, self.effect_volume, "white", .75, .75, 11],
+            [8, self.fullscreen, "white", .75, .35, 2],
+            [7, self.max_fps, "white", .75, .45, 2],
+            [7, self.overall_volume, "white", .75, .55, 11],
+            [7, self.music_volume, "white", .75, .65, 11],
+            [7, self.effect_volume, "white", .75, .75, 11],
         )
 
         self.menu_index = 0
@@ -113,7 +113,7 @@ class Options(Menu):
         # options choice
         for option in self.options:
             self.draw.draw_text(option[0], option[1], option[2],
-                                self.CANVAS_W * option[3], self.CANVAS_H * option[4], False)
+                                self.CANVAS_W * option[3], self.CANVAS_H * option[4], 'left')
         # value of setting
         for value in self.setted_value:
             self.draw.draw_text(

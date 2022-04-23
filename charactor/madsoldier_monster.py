@@ -27,17 +27,18 @@ class Madsoldier():
         self.heal = 15
         self.atk_cd = 3000
 
-    def update(self, speed, animation=False):
+    def update(self, speed, dt, animation=False):
+        adj_speed = speed * dt * 60
         if self.attacking == True:
             self.image = self.sprite.madsoldier_list_atk[int(self.current_sprite)]
-            self.current_sprite += speed
+            self.current_sprite += adj_speed
 
             if int(self.current_sprite) >= len(self.sprite.madsoldier_list_atk):
                 self.current_sprite = 0
                 self.attacking = False
 
         elif animation == True:
-            self.current_sprite += speed
+            self.current_sprite += adj_speed
 
             if int(self.current_sprite) >= len(self.sprite.madsoldier_list_idle):
                 self.current_sprite = 0
@@ -60,7 +61,7 @@ class Madsoldier():
         self.image = self.sprite.madsoldier_list_idle[int(self.current_sprite)]
 
 # Creating the sprites and groups
-    def draw_sprite(self, screen, animation):
+    def draw_sprite(self, screen, animation, dt):
         if self.attacking:
             self.rect = (225 - 5, 100)
         elif self.hitted:
@@ -69,7 +70,7 @@ class Madsoldier():
         else:
             self.rect = (225, 100)
         screen.blit(self.image, self.rect)
-        self.update(0.25, animation)
+        self.update(0.25, dt, animation)
     
     #def add_monster(self):
     #     self.moving_monster_sprites = pygame.sprite.Group()

@@ -19,7 +19,7 @@ class State():
         self.draw = Draw(self.canvas, self.screen)
         self.sprites = Sprites()
         
-        self.background_dir = os.path.join(self.sprites.sprites_dir, 'background')
+        self.background_dir = os.path.join(self.draw.assets_dir, 'background')
 
     def update(self, delta_time, actions):
         self.sound.update_volume(
