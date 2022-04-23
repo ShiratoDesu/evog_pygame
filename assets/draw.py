@@ -18,8 +18,9 @@ class Draw(Assets):
 
     def draw_text(self, size, text, color, x, y, align = 'center'):
         font = pygame.font.Font(self.main_font, size)
-        text_surface = font.render(str(text), self.anti_aliasing, color).convert_alpha()
+        text_surface = font.render(str(text), self.anti_aliasing, color).convert()
         text_rect = text_surface.get_rect()
+
         if align == 'center':
             text_rect.center = (x, y)
         elif align == 'right':
@@ -27,6 +28,13 @@ class Draw(Assets):
         elif align == 'left':
             text_rect.midleft = (x, y)
         self.canvas.blit(text_surface, text_rect)
+    
+    def draw_text_with_outline(self, size, text, color, x, y, align = 'center', outline_color = 'black'):
+        self.draw_text(size, text, outline_color, x + 1, y + 1, align)
+        self.draw_text(size, text, outline_color, x + 1, y - 1, align)
+        self.draw_text(size, text, outline_color, x - 1, y + 1, align)
+        self.draw_text(size, text, outline_color, x - 1, y - 1, align)
+        self.draw_text(size, text, color, x, y, align)
 
     def fade_screen(self, color, state, fade_time=200):
         fade_canvas = pygame.Surface((self.canvas_w, self.canvas_h)).convert_alpha()
