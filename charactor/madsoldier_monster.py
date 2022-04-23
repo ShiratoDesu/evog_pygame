@@ -21,9 +21,9 @@ class Madsoldier():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Mad soldier'
-        self.hp = 100
+        self.hp = 75
         self.hp_bar_lenght = 70
-        self.atk = 10
+        self.atk = 4
         self.heal = 15
         self.atk_cd = 3000
 

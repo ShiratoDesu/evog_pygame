@@ -22,7 +22,7 @@ class Littleghost():
         self.name = 'Little Ghost'
         self.hp = 175
         self.hp_bar_lenght = 70
-        self.atk = 15
+        self.atk = 6
         self.heal = 1
         self.atk_cd = 5000
 

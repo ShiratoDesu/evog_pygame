@@ -50,8 +50,8 @@ class Randomdice():
     def attack(self):
         self.current_sprite = 0
         random.seed(time.time())
-        self.atk = random.randrange(1, 50)
-        self.atk_cd = random.randrange(3000, 6000)
+        self.atk = random.randrange(2, 13)
+        self.atk_cd = random.randrange(2000, 7000)
         self.attacking = True
     
     def get_hitted(self):

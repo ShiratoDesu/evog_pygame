@@ -18,9 +18,9 @@ class Mrcube():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Mr.cube'
-        self.hp = 150
+        self.hp = 100
         self.hp_bar_lenght = 70
-        self.atk = 5
+        self.atk = 2
         self.heal = 20
         self.atk_cd = 2000
 

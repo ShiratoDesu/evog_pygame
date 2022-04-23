@@ -23,7 +23,7 @@ class Forestenergy():
         self.name = 'Forest Energy'
         self.hp = 250
         self.hp_bar_lenght = 100
-        self.atk = 20
+        self.atk = 9
         self.heal = 75
         self.atk_cd = 5000
 

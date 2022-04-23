@@ -21,7 +21,7 @@ elbow ข้อศอก
 toe นิ้วเท้า
 tongue ลิ้น
 ankle ข้อเท้า
-wheel กงล้อ, ล้อ
+wheel กงล้อ,ล้อ
 reindeer กวางเรนเดียร์
 snowman ตุ๊กตาหิมะ
 bottle ขวด

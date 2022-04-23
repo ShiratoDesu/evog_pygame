@@ -18,10 +18,10 @@ class Player():
         self.hitted = False
 
         self.name = 'Sir.Evog'
-        self.hp = 100
+        self.hp = 50
         self.hp_bar_lenght = 70
         self.atk = 25
-        self.heal = 10
+        self.heal = 5
 
     def update(self, speed, dt, animation=False):
         adj_speed = speed * dt * 60

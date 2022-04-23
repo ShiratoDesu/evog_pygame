@@ -116,27 +116,50 @@ class GameScene(State):
 
         # when player escape button down pause game and show exit to title choice
         if actions['escape']:
-            self.timer.pause_timer()
+            # keep all word correct count
+            self.word_correct += self.word.word_correct_count
+            self.word.reset_word_count()
+            self.monster_visible = False
+            self.sound.change_music(self.sound.begin_theme_end, 1, 1)
+            self.draw.fade_screen('black')
+            new_state = EndScreen(self.game, self.timer.elasped_time,
+                                  self.word_correct, self.player_hp.target_health, self.main_menu)
+            new_state.enter_state()
+            # self.timer.pause_timer()
 
-            # exit to main menu
-            if self.main_menu.check_confirm('Exit to Menu?', 7):
-                self.monster_visible = False
-                while len(self.game.state_stack) > 2:
-                    self.exit_state()
-                    self.sound.change_music(self.sound.title_theme, 1)
-                    self.draw.fade_screen('black', 100)
-            else:
+            # # exit to main menu
+            # if self.main_menu.check_confirm('Exit to Menu?', 7):
+            #     self.monster_visible = False
+            #     while len(self.game.state_stack) > 2:
+            #         self.exit_state()
+            #         self.sound.change_music(self.sound.title_theme, 1)
+            #         self.draw.fade_screen('black', 100)
+            # else:
 
-                # for fix bug (unknown str) add here
-                self.game.user_text = self.game.user_text[:-1]
-                self.timer.unpause_timer()
+            #     # for fix bug (unknown str) add here
+            #     self.game.user_text = self.game.user_text[:-1]
+            #     self.timer.unpause_timer()
 
         # when player enter button down
         if actions['enter'] & (self.monster_visible == True):
 
             # cheat
-            if self.game.user_text.lower().strip() == 'gg':
-                self.player_hp.take_health(self.player_hp.max_health)
+            if self.game.user_text.lower().strip() == 'ggez':
+                self.sound.play_sound(self.sound.shadow_atk_sound)
+                self.monster_hp.take_damage(self.monster.hp)
+                self.monster.killed()
+                if ((self.current_monster - 1) % 10) == 0:
+                    self.boss_killed = True
+            if self.game.user_text.lower().strip() == '_skip_':
+                self.sound.play_sound(self.sound.heal_sound)
+                self.boss_index = 2
+                self.background_index = 2
+                self.current_word_file = 2
+                self.current_monster = 30
+                self.monster_hp.take_damage(self.monster.hp)
+                self.monster.killed()
+                if ((self.current_monster - 1) % 10) == 0:
+                    self.boss_killed = True
 
             # check player word
             # get new word and heal player monster take dmg

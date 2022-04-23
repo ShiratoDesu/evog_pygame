@@ -20,9 +20,9 @@ class Archer():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Skeleton Archer'
-        self.hp = 75
+        self.hp = 100
         self.hp_bar_lenght = 70
-        self.atk = 40
+        self.atk = 8
         self.heal = 10
         self.atk_cd = 6000
 

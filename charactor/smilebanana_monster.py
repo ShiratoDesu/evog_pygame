@@ -20,9 +20,9 @@ class Smilebanana():
         self.rect.center = [pos_x, pos_y]
 
         self.name = 'Smile Banana'
-        self.hp = 60
+        self.hp = 50
         self.hp_bar_lenght = 70
-        self.atk = 20
+        self.atk = 7
         self.heal = 1
         self.atk_cd = 4000
 

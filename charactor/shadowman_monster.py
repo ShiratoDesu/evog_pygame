@@ -23,7 +23,7 @@ class Shadowman():
         self.name = 'Shadowman'
         self.hp = 375
         self.hp_bar_lenght = 110
-        self.atk = 15
+        self.atk = 6
         self.heal = 1
         self.atk_cd = 3000
 

@@ -22,7 +22,7 @@ class Darkknight():
         self.name = 'Dark Knight'
         self.hp = 625
         self.hp_bar_lenght = 130
-        self.atk = 50
+        self.atk = 13
         self.heal = 25
         self.atk_cd = 7000
 

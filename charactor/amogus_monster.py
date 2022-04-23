@@ -22,7 +22,7 @@ class Amogus():
         self.name = 'Amogus'
         self.hp = 750
         self.hp_bar_lenght = 140
-        self.atk = 33
+        self.atk = 8
         self.heal = 50
         self.atk_cd = 4000
 
