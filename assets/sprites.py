@@ -29,6 +29,7 @@ class Sprites(Assets):
         self.archer_atk_dir = os.path.join(self.sprites_dir, 'archer_atk')
         self.darkknight_atk_dir = os.path.join(self.sprites_dir, 'darkknight_atk')
 
+        
         self.demo_monster_idle_dir = os.path.join(self.sprites_dir, 'demo_idle')
         self.load_sprites()
 

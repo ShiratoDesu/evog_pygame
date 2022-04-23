@@ -1,3 +1,4 @@
+import pygame
 from charactor.amogus_monster import Amogus
 from charactor.archer_monster import Archer
 from charactor.darkknight_monster import Darkknight
@@ -49,7 +50,18 @@ class GameScene(State):
                                 self.sound.prepare_for_battle_loop,
                                 self.sound.exploring_the_unknown_loop,
                                 self.sound.amogus_drip]
-        self.background_list = ['black', 'red', 'green', 'blue', 'gray']
+
+        self.forest_bg = os.path.join(self.background_dir, 'forest_BG.png')
+        self.foggyforest_bg = os.path.join(self.background_dir, 'foggyforest_BG.png')
+        self.mountain_bg = os.path.join(self.background_dir, 'mountain_BG.png')
+        self.random_bg = os.path.join(self.background_dir, 'random_BG.png')
+        self.amogus_bg = os.path.join(self.background_dir, 'amogus_BG.png')
+
+        self.background_list = [pygame.image.load(self.forest_bg),
+                                pygame.image.load(self.foggyforest_bg),
+                                pygame.image.load(self.random_bg),
+                                pygame.image.load(self.mountain_bg),
+                                pygame.image.load(self.amogus_bg)]
 
         self.current_monster = 1
         self.boss_index = 0
@@ -217,7 +229,7 @@ class GameScene(State):
     def render(self, surface):
 
         # fill background
-        surface.fill(self.background_list[self.background_index])
+        surface.blit(self.background_list[self.background_index], (0,0))
 
         # draw player sprite
         self.player.draw_sprite(surface, self.player_idle)

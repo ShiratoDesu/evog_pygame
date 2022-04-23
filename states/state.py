@@ -1,3 +1,4 @@
+import os
 from assets.sound import Sound
 from assets.draw import Draw
 from assets.sprites import Sprites
@@ -17,6 +18,8 @@ class State():
                            self.game.setting_value["effect_sound"])
         self.draw = Draw(self.canvas, self.screen)
         self.sprites = Sprites()
+        
+        self.background_dir = os.path.join(self.sprites.sprites_dir, 'background')
 
     def update(self, delta_time, actions):
         self.sound.update_volume(

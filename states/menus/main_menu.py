@@ -1,3 +1,5 @@
+import os
+import pygame
 from states.credits import Credits
 from states.game_scene import GameScene
 from states.menus.menu import Menu
@@ -19,6 +21,8 @@ class MainMenu(Menu):
         self.menu_index = 0
         self.CURSOR_OFFSET = 40
 
+        self.main_menu_bg = os.path.join(self.background_dir, 'main_menu_BG.png')
+
     def update(self, delta_time, actions):
         super().update(delta_time, actions)
         self.update_cursor(actions)
@@ -29,7 +33,7 @@ class MainMenu(Menu):
             self.exit_game()
 
     def render(self, surface):
-        surface.fill("black")
+        surface.blit(pygame.image.load(self.main_menu_bg), (0,0))
         self.draw.draw_text(12, "EVOG the Adventure", "yellow",
                             self.CANVAS_W * .5, self.CANVAS_H * .3)
         self.draw_menu_and_cursor(surface)
@@ -57,7 +61,7 @@ class MainMenu(Menu):
         self.menus[last_index][0] -= 1
         self.menus[last_index][2] = "white"
         self.menus[self.menu_index][0] += 1
-        self.menus[self.menu_index][2] = "gray"
+        self.menus[self.menu_index][2] = "red"
 
     def transition_state(self):
         if self.menus[self.menu_index][1] == "Start":
