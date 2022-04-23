@@ -88,7 +88,7 @@ class GameScene(State):
                           os.path.join(self.assets.words_dir, 'engmix_lv5.txt')]
         self.current_word_file = 0
         self.word_correct = 0
-        self.word = Word(self.canvas, self.word_file[self.current_word_file])
+        self.word = Word(self.canvas, self.word_file[self.current_word_file], self.screen)
         self.word.get_new_word()
 
         # set timer
@@ -211,8 +211,7 @@ class GameScene(State):
                         self.background_index = len(self.background_list) - 1
 
                     # get new word instance and new world
-                    self.word = Word(
-                        self.canvas, self.word_file[self.current_word_file])
+                    self.word = Word(self.canvas, self.word_file[self.current_word_file], self.screen)
                     self.boss_killed = False
 
                 # get new word
@@ -241,32 +240,33 @@ class GameScene(State):
 
             # render and show input box
             self.word.renderInputBox('white', self.game.user_text)
-            self.draw.draw_text(6, '<Answer Force>', 'yellow', self.CANVAS_W * 0.5, self.CANVAS_H * 0.7)
+            self.draw.draw_text_with_outline(6, '<Answer Force>', 'yellow', self.CANVAS_W * 0.5, self.CANVAS_H * 0.7)
 
             # show meaning to screen
-            surface.blit(self.word.answerMeaning, self.word.meaning_rect)
+    
+            # surface.blit(self.word.answerMeaning, self.word.meaning_rect)
 
         self.render_name_and_helath()
 
         # render time count
-        self.draw.draw_text(7, 'Time', 'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.05)
-        self.draw.draw_text(7, int(self.timer.elasped_time),
+        self.draw.draw_text_with_outline(7, 'Time', 'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.05)
+        self.draw.draw_text_with_outline(7, int(self.timer.elasped_time),
                             'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.1)
 
     def render_name_and_helath(self):
 
         # draw player name and health bar
-        self.draw.draw_text(8, self.player.name, 'white', 52, 37)
+        self.draw.draw_text_with_outline(8, self.player.name, 'white', 52, 37)
         self.player_hp.update(self.game.dt)
-        self.draw.draw_text(6, str(self.player_hp.target_health) +
+        self.draw.draw_text_with_outline(6, str(self.player_hp.target_health) +
                             '/' + str(self.player_hp.max_health), 'white', 47, 50)
 
         # draw monster name and heath bar
         if self.monster_visible == True:
             self.monster_hp.update(self.game.dt)
-            self.draw.draw_text(8, self.monster.name,
+            self.draw.draw_text_with_outline(8, self.monster.name,
                                 'white', 300, 37, 'right')
-            self.draw.draw_text(6, str(self.monster_hp.target_health) + '/' +
+            self.draw.draw_text_with_outline(6, str(self.monster_hp.target_health) + '/' +
                                 str(self.monster_hp.max_health), 'white', 295, 50, 'right')
 
     def spawn_boss_and_monster(self):

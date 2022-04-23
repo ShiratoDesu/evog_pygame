@@ -13,8 +13,8 @@ class Draw(Assets):
         self.screen_w, self.screen_h = screen.get_size()
         self.anti_aliasing = False
 
-    def load_font(self):
-        self.main_font = os.path.join(self.font_dir, "PressStart2P-vaV7.ttf")
+    def load_font(self, font = "PressStart2P-vaV7.ttf"):
+        self.main_font = os.path.join(self.font_dir, font)
 
     def draw_text(self, size, text, color, x, y, align = 'center'):
         font = pygame.font.Font(self.main_font, size)

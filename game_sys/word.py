@@ -3,14 +3,16 @@ import random
 import time
 import os
 from assets.assets import Assets
+from assets.draw import Draw
 
 class Word():
 
-    def __init__(self, canvas, word_file):
+    def __init__(self, canvas, word_file, screen):
         super().__init__()
         
         # self.healthbar = Healthbar(canvas.get_width(), canvas.get_height(), canvas)
         self.assets = Assets()
+        self.draw = Draw(canvas, screen)
 
         self.font_thaipixel = os.path.join(self.assets.font_dir, "zoo8.ttf")
 
@@ -18,6 +20,8 @@ class Word():
         self.canvas = canvas
         self.font_small = pygame.font.Font(self.font_thaipixel, 20)
         self.font_large = pygame.font.Font(self.font_thaipixel, 30)
+
+        self.draw.load_font('zoo8.ttf')
         
         self.input_space = pygame.Rect(canvas.get_width()/2, canvas.get_height()/2, 0, 20)
         # self.input_space.center = (canvas.get_width()/2, canvas.get_height()*0.3)
@@ -47,6 +51,8 @@ class Word():
             return False
 
     def renderInputBox(self, color, userText):
+
+        self.draw.draw_text_with_outline(35, self.meaning, 'white', self.canvas.get_width()*0.5, self.canvas.get_height()*0.5)
 
         pygame.draw.rect(self.canvas, 'black', self.input_space)
         pygame.draw.rect(self.canvas, color, self.input_space, 1)

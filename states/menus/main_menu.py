@@ -13,10 +13,10 @@ class MainMenu(Menu):
         self.sound.play_music(self.sound.title_theme)
         # [size, text, position_x_in_screen, offset_y_in_screen]
         self.menus = (
-            [11, "Start", "gray", .5, .5],
+            [11, "Start", "red", .5, .5],
             [8, "Options", "white", .5, .65],
-            [8, "Credits", "white", .5, .7],
-            [7, "Exit", "white", .5, .8]
+            [8, "Credits", "white", .5, .75],
+            [7, "Exit", "white", .5, .85]
         )
         self.menu_index = 0
         self.CURSOR_OFFSET = 40
@@ -44,9 +44,9 @@ class MainMenu(Menu):
             self.draw.draw_text_with_outline(menu[0], menu[1], menu[2], self.CANVAS_W *
                                 menu[3], self.CANVAS_H * menu[4])
         # cursor here
-        self.draw.draw_text_with_outline(9, ">", "gray", (self.CANVAS_W * self.menus[self.menu_index][3]) -
+        self.draw.draw_text_with_outline(9, ">", "red", (self.CANVAS_W * self.menus[self.menu_index][3]) -
                             self.CURSOR_OFFSET, self.CANVAS_H * self.menus[self.menu_index][4])
-        self.draw.draw_text_with_outline(9, "<", "gray", (self.CANVAS_W * self.menus[self.menu_index][3]) +
+        self.draw.draw_text_with_outline(9, "<", "red", (self.CANVAS_W * self.menus[self.menu_index][3]) +
                             self.CURSOR_OFFSET, self.CANVAS_H * self.menus[self.menu_index][4])
 
     # change menu index if press up and down button
