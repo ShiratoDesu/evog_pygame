@@ -124,7 +124,7 @@ class GameScene(State):
                 while len(self.game.state_stack) > 2:
                     self.exit_state()
                     self.sound.change_music(self.sound.title_theme, 1)
-                    self.draw.fade_screen('black', self.main_menu, 100)
+                    self.draw.fade_screen('black', 100)
             else:
 
                 # for fix bug (unknown str) add here

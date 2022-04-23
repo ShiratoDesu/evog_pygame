@@ -7,14 +7,14 @@ class Title(State):
     def __init__(self, game) -> None:
         State.__init__(self, game)
         self.timer = Time()
-        self.draw.fade_screen("black", self)
+        self.draw.fade_screen("black")
         self.timer.reset_last_ticks()
 
     def update(self, delta_time, actions):
         super().update(delta_time, actions)
         if self.timer.get_time_diff(1000):
             new_state = MainMenu(self.game)
-            self.draw.fade_screen("white", new_state)
+            self.draw.fade_screen("white")
             new_state.enter_state()
         # if actions["enter"]:
         #     self.sound.play_sound(self.sound.confirm_echo_sound)

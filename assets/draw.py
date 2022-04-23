@@ -36,22 +36,13 @@ class Draw(Assets):
         self.draw_text(size, text, outline_color, x - 1, y - 1, align)
         self.draw_text(size, text, color, x, y, align)
 
-    def fade_screen(self, color, state, fade_time=200):
+    def fade_screen(self, color, fade_time=200):
         fade_canvas = pygame.Surface((self.canvas_w, self.canvas_h)).convert_alpha()
         opacity = 0
         fade_canvas.fill(color)
         for i in range(0, fade_time):
             opacity += 1
             fade_canvas.set_alpha(opacity)
-            self.canvas.blit(fade_canvas, (0, 0))
-            self.screen.blit(pygame.transform.scale(
-                self.canvas, (self.screen_w, self.screen_h)), (0, 0))
-            pygame.display.flip()
-            pygame.time.delay(5)
-        for i in range(0, fade_time):
-            opacity -= 1
-            fade_canvas.set_alpha(opacity)
-            state.render(self.canvas)
             self.canvas.blit(fade_canvas, (0, 0))
             self.screen.blit(pygame.transform.scale(
                 self.canvas, (self.screen_w, self.screen_h)), (0, 0))

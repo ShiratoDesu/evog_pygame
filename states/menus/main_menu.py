@@ -80,7 +80,7 @@ class MainMenu(Menu):
         self.game.game_delay(2)
         new_state = GameScene(self.game, self)
         self.game.reset_user_text()
-        self.draw.fade_screen("white", new_state)
+        self.draw.fade_screen("white")
         new_state.enter_state()
         new_state.timer.reset_start_time()
         new_state.timer.reset_last_ticks()
@@ -88,13 +88,13 @@ class MainMenu(Menu):
     def enter_options_menu(self):
         self.play_confirm_sound()
         new_state = Options(self.game)
-        self.draw.fade_screen("black", new_state, 100)
+        self.draw.fade_screen("black", 100)
         new_state.enter_state()
     
     def enter_credits(self):
         self.play_confirm_sound()
         new_state = Credits(self.game)
-        self.draw.fade_screen('black', new_state, 100)
+        self.draw.fade_screen('black', 100)
         new_state.enter_state()
 
     def exit_game(self):

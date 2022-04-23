@@ -19,7 +19,7 @@ knee หัวเข่า
 thumb นิ้วหัวแม่มือ
 elbow ข้อศอก
 toe นิ้วเท้า
-tongue นิ้ว
+tongue ลิ้น
 ankle ข้อเท้า
 wheel กงล้อ, ล้อ
 reindeer กวางเรนเดียร์

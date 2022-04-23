@@ -15,7 +15,7 @@ class Credits(State):
         if actions['enter'] or actions['escape']:
             self.sound.play_sound(self.sound.back_echo_sound)
             self.sound.change_music(self.sound.title_theme, 1)
-            self.draw.fade_screen("black", self.prev_state, 100)
+            self.draw.fade_screen("black", 100)
             self.exit_state()
     
     def render(self, surface):

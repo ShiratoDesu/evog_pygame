@@ -50,7 +50,7 @@ class Options(Menu):
             self.update_cursor(actions)
             if actions["escape"]:
                 self.play_back_sound()
-                self.draw.fade_screen("black", self.prev_state, 100)
+                self.draw.fade_screen("black", 100)
                 self.exit_state()
             if actions["enter"]:
                 self.play_confirm_sound()
