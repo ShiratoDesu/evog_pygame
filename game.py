@@ -11,7 +11,9 @@ class Game():
 
         os.environ['SDL_VIDEO_CENTERED'] = '1'
         pygame.init()
+        icon = pygame.image.load('icon.png')
         pygame.display.set_caption("Evog")
+        pygame.display.set_icon(icon)
 
         self.setting_value = {
             "fullscreen": False,
