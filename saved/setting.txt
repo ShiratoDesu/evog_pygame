@@ -1,1 +1,1 @@
-{"fullscreen": false, "max_fps": 60, "overall_sound": 0.5, "music_sound": 0.4, "effect_sound": 0.5, "high_score": 13292}
+{"fullscreen": false, "max_fps": 60, "overall_sound": 0.5, "music_sound": 0.4, "effect_sound": 0.6, "high_score": 17411}

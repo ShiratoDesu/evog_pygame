@@ -1,5 +1,3 @@
-import pygame
-import sys
 from assets.sprites import Sprites
 
 class Player():
@@ -60,9 +58,3 @@ class Player():
             self.rect.center = (self.pos_x, self.pos_y)
         screen.blit(self.image, self.rect)
         self.update(0.25, dt, animation)
-
-    
-    # def add_player(self):
-    #     self.moving_sprites = pygame.sprite.Group()
-    #     player = Player(self.pos_x, self.pos_y)
-    #     self.moving_sprites.add(player)

@@ -23,7 +23,7 @@ import random
 
 
 class GameScene(State):
-    def __init__(self, game, main_menu) -> None:
+    def __init__(self, game) -> None:
         State.__init__(self, game)
         self.assets = Assets()
 
@@ -62,14 +62,12 @@ class GameScene(State):
         self.boss_index = 0
         self.background_index = 0
 
-## DemoMonster(self.CANVAS_W * 0.8, self.CANVAS_H * 0.8 )
-
         # random monster from monster list and boss
         self.spawn_boss_and_monster()
 
         # set player and monster hp bar
         self.player_hp = Healthbar(
-            self.canvas, self.player.hp, self.player.hp_bar_lenght, 20, 45)
+            self.canvas, self.player.hp, self.player.hp_bar_lenght, 20, 35)
         self.monster_hp = Healthbar(
             self.canvas, self.monster.hp, self.monster.hp_bar_lenght, 300 - self.monster.hp_bar_lenght, 45, True)
 
@@ -100,7 +98,6 @@ class GameScene(State):
         self.sound.change_music(self.sound.begin_theme_intro, 1, 1)
         self.sound.queue_music(self.sound.begin_theme_loop)
 
-        self.main_menu = main_menu
         self.monster_visible = True
         self.boss_killed = False
 
@@ -123,43 +120,11 @@ class GameScene(State):
             self.sound.change_music(self.sound.begin_theme_end, 1, 1)
             self.draw.fade_screen('black')
             new_state = EndScreen(self.game, self.timer.elasped_time,
-                                  self.word_correct, self.player_hp.target_health, self.main_menu)
+                                  self.word_correct, self.player_hp.target_health)
             new_state.enter_state()
-            # self.timer.pause_timer()
-
-            # # exit to main menu
-            # if self.main_menu.check_confirm('Exit to Menu?', 7):
-            #     self.monster_visible = False
-            #     while len(self.game.state_stack) > 2:
-            #         self.exit_state()
-            #         self.sound.change_music(self.sound.title_theme, 1)
-            #         self.draw.fade_screen('black', 100)
-            # else:
-
-            #     # for fix bug (unknown str) add here
-            #     self.game.user_text = self.game.user_text[:-1]
-            #     self.timer.unpause_timer()
 
         # when player enter button down
         if actions['enter'] & (self.monster_visible == True):
-
-            # cheat
-            if self.game.user_text.lower().strip() == 'ggez':
-                self.sound.play_sound(self.sound.shadow_atk_sound)
-                self.monster_hp.take_damage(self.monster.hp)
-                self.monster.killed()
-                if ((self.current_monster - 1) % 10) == 0:
-                    self.boss_killed = True
-            if self.game.user_text.lower().strip() == '_skip_':
-                self.sound.play_sound(self.sound.heal_sound)
-                self.boss_index = 2
-                self.background_index = 2
-                self.current_word_file = 2
-                self.current_monster = 30
-                self.monster_hp.take_damage(self.monster.hp)
-                self.monster.killed()
-                if ((self.current_monster - 1) % 10) == 0:
-                    self.boss_killed = True
 
             # check player word
             # get new word and heal player monster take dmg
@@ -177,11 +142,20 @@ class GameScene(State):
                     self.monster.killed()
                     if ((self.current_monster - 1) % 10) == 0:
                         self.boss_killed = True
+            
+                        # cheat
+            elif self.game.user_text.lower().strip() == '_ggez_':
+                self.sound.play_sound(self.sound.shadow_atk_sound)
+                self.monster_hp.take_damage(self.monster.hp)
+                self.monster.killed()
+                if ((self.current_monster - 1) % 10) == 0:
+                    self.boss_killed = True
 
             # monster heal if monster health > 0
             elif self.monster_hp.target_health > 0:
                 self.monster_hp.take_health(self.monster.heal)
                 self.sound.play_sound(self.sound.heal_sound)
+                self.word.get_new_word()
 
             # reset input user_text
             self.game.user_text = ''
@@ -208,7 +182,7 @@ class GameScene(State):
             self.word_correct += self.word.word_correct_count
             self.word.reset_word_count()
             new_state = EndScreen(self.game, self.timer.elasped_time,
-                                  self.word_correct, self.player_hp.target_health, self.main_menu)
+                                  self.word_correct, self.player_hp.target_health)
             new_state.enter_state()
             self.sound.change_music(self.sound.begin_theme_end, 1, 1)
 
@@ -263,26 +237,24 @@ class GameScene(State):
 
             # render and show input box
             self.word.renderInputBox('white', self.game.user_text)
-            self.draw.draw_text_with_outline(6, '<Answer Force>', 'yellow', self.CANVAS_W * 0.5, self.CANVAS_H * 0.7)
-
-            # show meaning to screen
-    
-            # surface.blit(self.word.answerMeaning, self.word.meaning_rect)
+            self.draw.draw_text_with_outline(6, '<Answer Force>', 'yellow', self.CANVAS_W * 0.5, self.CANVAS_H * 0.65)
 
         self.render_name_and_helath()
 
         # render time count
-        self.draw.draw_text_with_outline(7, 'Time', 'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.05)
+        self.draw.draw_text_with_outline(7, 'Time', 'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.07)
         self.draw.draw_text_with_outline(7, int(self.timer.elasped_time),
-                            'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.1)
+                            'white', self.CANVAS_W * 0.5, self.CANVAS_H * 0.12)
+        
+        self.draw.draw_text_with_outline(7, 'Esc[X]', 'gray', self.CANVAS_W * 0.97, self.CANVAS_H * 0.05, 'right')
 
     def render_name_and_helath(self):
 
         # draw player name and health bar
-        self.draw.draw_text_with_outline(8, self.player.name, 'white', 52, 37)
+        self.draw.draw_text_with_outline(8, self.player.name, 'white', 52, 27)
         self.player_hp.update(self.game.dt)
         self.draw.draw_text_with_outline(6, str(self.player_hp.target_health) +
-                            '/' + str(self.player_hp.max_health), 'white', 47, 50)
+                            '/' + str(self.player_hp.max_health), 'white', 40, 40)
 
         # draw monster name and heath bar
         if self.monster_visible == True:
@@ -309,7 +281,7 @@ class GameScene(State):
         elif self.boss_index >= len(self.boss_list):
             self.boss_index = 0
             new_state = EndScreen(self.game, self.timer.elasped_time,
-                                  self.word_correct, self.player_hp.target_health, self.main_menu)
+                                  self.word_correct, self.player_hp.target_health)
             new_state.enter_state()
             self.sound.change_music(self.sound.begin_theme_end, 1, 1)
         else:

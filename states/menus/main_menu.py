@@ -77,8 +77,8 @@ class MainMenu(Menu):
     def start_game(self):
         self.sound.fadeout_music(0.5)
         self.sound.play_music(self.sound.title_theme_end, 1)
-        self.game.game_delay(2)
-        new_state = GameScene(self.game, self)
+        pygame.time.delay(2000)
+        new_state = GameScene(self.game)
         self.game.reset_user_text()
         self.draw.fade_screen("white")
         new_state.enter_state()
@@ -101,5 +101,5 @@ class MainMenu(Menu):
         if super().check_confirm("Exit?") == True:
             self.sound.fadeout_music(0.5)
             self.sound.play_sound(self.sound.back_echo_sound)
-            self.game.game_delay(1)
+            pygame.time.delay(1000)
             self.game.exit_game()

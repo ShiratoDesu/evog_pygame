@@ -28,16 +28,12 @@ class Sound(Assets):
         self.begin_theme_end = os.path.join(
             self.bg_musics_dir, "JourneyBeginsEnd.wav")
         self.icy_cave_loop = os.path.join(self.bg_musics_dir, "TheIcyCaveLoop.wav")
-        self.icy_cave_end = os.path.join(self.bg_musics_dir, "TheIcyCaveEnd.wav")
         self.mysterious = os.path.join(self.bg_musics_dir, "MysteriousDungeon.wav")
         self.prepare_for_battle_intro = os.path.join(self.bg_musics_dir, "PrepareForBattleIntro.wav")
         self.prepare_for_battle_loop = os.path.join(self.bg_musics_dir, "PrepareForBattleLoop.wav")
-        self.prepare_for_battle_end = os.path.join(self.bg_musics_dir, "PrepareForBattleEnd.wav")
         self.exploring_the_unknown_intro = os.path.join(self.bg_musics_dir, "ExploringTheUnknownIntro.wav")
         self.exploring_the_unknown_loop = os.path.join(self.bg_musics_dir, "ExploringTheUnknownLoop.wav")
-        self.exploring_the_unknown_end = os.path.join(self.bg_musics_dir, "ExploringTheUnknownEnd.wav")
         self.decisive_battle_loop = os.path.join(self.bg_musics_dir, "DecisiveBattleLoop.wav")
-        self.decisive_battle_end = os.path.join(self.bg_musics_dir, "DecisiveBattleEnd.wav")
         self.the_final_of_the_fantasy = os.path.join(self.bg_musics_dir, "TheFinalofTheFantasy.wav")
         self.amogus_drip = os.path.join(self.bg_musics_dir, 'AmogusDrip.wav')
 

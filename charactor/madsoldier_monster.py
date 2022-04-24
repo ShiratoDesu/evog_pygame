@@ -1,6 +1,3 @@
-from pickle import FALSE
-import pygame
-from assets.sound import Sound 
 from assets.sprites import Sprites
 
 class Madsoldier():
@@ -11,7 +8,7 @@ class Madsoldier():
         self.atk_sound = sound.mad_soldier_atk_sound
 
         self.sprite = Sprites()
-        self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
+        self.sound = sound
         self.attacking = False
         self.hitted = False
         
@@ -71,8 +68,3 @@ class Madsoldier():
             self.rect = (225, 100)
         screen.blit(self.image, self.rect)
         self.update(0.25, dt, animation)
-    
-    #def add_monster(self):
-    #     self.moving_monster_sprites = pygame.sprite.Group()
-    #     monster = Mrcube(self.pos_x, self.pos_y)
-    #     self.moving_monster_sprites.add(monster)

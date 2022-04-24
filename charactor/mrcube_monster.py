@@ -1,4 +1,3 @@
-import pygame
 from assets.sprites import Sprites
 
 class Mrcube():
@@ -67,8 +66,3 @@ class Mrcube():
             self.rect = (225, 100)
         screen.blit(self.image, self.rect)
         self.update(0.25, dt, animation)
-    
-    #def add_monster(self):
-    #     self.moving_monster_sprites = pygame.sprite.Group()
-    #     monster = Mrcube(self.pos_x, self.pos_y)
-    #     self.moving_monster_sprites.add(monster)

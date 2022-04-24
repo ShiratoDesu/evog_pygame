@@ -1,12 +1,11 @@
 from states.state import State
 
 class EndScreen(State):
-    def __init__(self, game, time, count, remaining_health, main_menu):
+    def __init__(self, game, time, count, remaining_health):
         super().__init__(game)
         self.score = 0
         self.count = count
         self.time = int(time)
-        self.main_menu = main_menu
         self.calculate_score(time, count, remaining_health)
         
     def calculate_score(self, time, count, remaining_health):
@@ -30,9 +29,9 @@ class EndScreen(State):
 
     def render(self, surface):
         surface.fill('black')
-        self.draw.draw_text(12, 'GAME END' , 'white', self.CANVAS_W/2, self.CANVAS_H*0.2)
-        self.draw.draw_text(10, 'Score : ' + str(self.score) , 'white', self.CANVAS_W/2, self.CANVAS_H*0.35)
-        self.draw.draw_text(9, 'High score : ' + str(self.game.setting_value["high_score"]), 'white', self.CANVAS_W/2, self.CANVAS_H*0.5)
+        self.draw.draw_text_with_outline(12, 'GAME END' , 'pink', self.CANVAS_W/2, self.CANVAS_H*0.2, outline_color= 'red')
+        self.draw.draw_text(10, 'Score : ' + str(self.score) , 'green', self.CANVAS_W/2, self.CANVAS_H*0.35)
+        self.draw.draw_text(9, 'High score : ' + str(self.game.setting_value["high_score"]), 'yellow', self.CANVAS_W/2, self.CANVAS_H*0.5)
         self.draw.draw_text(8, 'Correct words : ' + str(self.count) , 'white', self.CANVAS_W/2, self.CANVAS_H*0.6)
         self.draw.draw_text(8, 'Time used : ' + str(self.time) + ' s', 'white', self.CANVAS_W/2, self.CANVAS_H*0.7)
-        self.draw.draw_text(7, 'Press Enter to main menu' , 'white', self.CANVAS_W/2, self.CANVAS_H*0.9)
+        self.draw.draw_text(7, 'Press Enter to main menu' , 'gray', self.CANVAS_W/2, self.CANVAS_H*0.9)

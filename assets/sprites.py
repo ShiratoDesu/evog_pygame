@@ -29,14 +29,11 @@ class Sprites(Assets):
         self.archer_atk_dir = os.path.join(self.sprites_dir, 'archer_atk')
         self.darkknight_atk_dir = os.path.join(self.sprites_dir, 'darkknight_atk')
 
-        
-        self.demo_monster_idle_dir = os.path.join(self.sprites_dir, 'demo_idle')
         self.load_sprites()
 
     # method to load sprites
     def load_sprites(self):
         self.kinght_sprite_idle = os.listdir(self.knight_idle_dir)
-        self.demo_monster_sprite_idle = os.listdir(self.demo_monster_idle_dir)
         self.mrcube_sprite_idle = os.listdir(self.mrcube_idle_dir)
         self.randomdice_sprite_idle = os.listdir(self.randomdice_idle_dir)
         self.shadowman_sprite_idle = os.listdir(self.shadowman_idle_dir)
@@ -62,7 +59,6 @@ class Sprites(Assets):
         
         # define list
         self.knight_list_idle = []
-        self.demo_monster = []
 
         self.mrcube_list_idle = []
         self.randomdice_list_idle = []
@@ -93,13 +89,6 @@ class Sprites(Assets):
             if knight_idle.endswith('.png'):
                 dir = os.path.join(self.knight_idle_dir, knight_idle)
                 self.knight_list_idle.append(pygame.image.load(dir))
-
-        for demo_monster_idle in self.demo_monster_sprite_idle[:]:
-            if demo_monster_idle.endswith('.png'):
-                dir = os.path.join(self.demo_monster_idle_dir, demo_monster_idle)
-                image = pygame.image.load(dir)
-                image_filp = pygame.transform.flip(image,True,False)
-                self.demo_monster.append(image_filp)
 
         for randomdice_idle in self.randomdice_sprite_idle[:]:
             if randomdice_idle.endswith('.png'):

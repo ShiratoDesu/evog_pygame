@@ -1,6 +1,4 @@
 import pygame
-import sys
-
 
 class Healthbar(pygame.sprite.Sprite):
     def __init__(self, canvas, health, healthbar_length, position_x, position_y, reverse=False):
@@ -36,10 +34,6 @@ class Healthbar(pygame.sprite.Sprite):
             self.target_health += amount
         if self.target_health >= self.max_health:
             self.target_health = self.max_health
-
-    # def basic_health(self):
-    #     pygame.draw.rect(self.canvas, (255,0,0), (10, 10, self.target_health/self.health_ratio, 25))
-    #     pygame.draw.rect(self.canvas, (255,255,255), (10, 10, self.health_bar_length, 25), 2)
 
     def advanced_health(self, change_speed):
         transition_width = 0

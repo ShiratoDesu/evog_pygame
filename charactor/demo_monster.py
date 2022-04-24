@@ -1,5 +1,4 @@
 import pygame
-import sys
 from assets.sprites import Sprites
 
 class DemoMonster(pygame.sprite.Sprite):

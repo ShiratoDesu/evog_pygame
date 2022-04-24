@@ -10,7 +10,6 @@ class Game():
     def __init__(self) -> None:
 
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        # pygame.mixer.pre_init(44100, -16, 2, 512)
         pygame.init()
         pygame.display.set_caption("Evog")
 
@@ -28,8 +27,6 @@ class Game():
         self.DEFAULT_W, self.DEFAULT_H = 1280, 720
         self.canvas = pygame.Surface((self.GAME_W, self.GAME_H))
         if self.setting_value["fullscreen"] == True:
-            # monitor = pygame.display.Info()
-            # self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
             self.SCREEN_W, self.SCREEN_H = self.DEFAULT_W, self.DEFAULT_H
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)
@@ -48,13 +45,6 @@ class Game():
             "down": False,
             "enter": False,
             "escape": False
-        }
-
-        self.colors = {
-            "black": (0, 0, 0),
-            "white": (255, 255, 255),
-            "red": (255, 0, 0),
-            "yellow": (255, 255, 0)
         }
 
         self.dt, self.prev_time = 0, 0
@@ -131,13 +121,8 @@ class Game():
         for action in self.actions:
             self.actions[action] = False
 
-    def game_delay(self, delay_sec):
-        pygame.time.delay(delay_sec * 1000)
-
     def change_resolution(self):
         if self.setting_value["fullscreen"] == True:
-            # monitor = pygame.display.Info()
-            # self.SCREEN_W, self.SCREEN_H = monitor.current_w, monitor.current_h
             self.SCREEN_W, self.SCREEN_H = self.DEFAULT_W, self.DEFAULT_H
             self.screen = pygame.display.set_mode(
                 (self.SCREEN_W, self.SCREEN_H), pygame.FULLSCREEN)

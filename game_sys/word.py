@@ -10,7 +10,6 @@ class Word():
     def __init__(self, canvas, word_file, screen):
         super().__init__()
         
-        # self.healthbar = Healthbar(canvas.get_width(), canvas.get_height(), canvas)
         self.assets = Assets()
         self.draw = Draw(canvas, screen)
 
@@ -19,12 +18,10 @@ class Word():
         self.word_file  = word_file
         self.canvas = canvas
         self.font_small = pygame.font.Font(self.font_thaipixel, 20)
-        self.font_large = pygame.font.Font(self.font_thaipixel, 30)
 
         self.draw.load_font('zoo8.ttf')
         
         self.input_space = pygame.Rect(canvas.get_width()/2, canvas.get_height()/2, 0, 20)
-        # self.input_space.center = (canvas.get_width()/2, canvas.get_height()*0.3)
         self.input_space.center
         self.word_correct_count = 0
 
@@ -37,12 +34,6 @@ class Word():
         self.word = self.chosenWord.split(' ')[0]
         self.meaning = self.chosenWord.split(' ')[1]
 
-        self.answer = self.font_small.render(self.word, False, (255, 255, 255))
-        self.answerMeaning = self.font_large.render(self.meaning, False, (255, 255, 255))
-
-        self.answer_rect = self.answer.get_rect(center = (self.canvas.get_width()*0.5, self.canvas.get_height()*0.7))
-        self.meaning_rect = self.answerMeaning.get_rect(center = (self.canvas.get_width()*0.5, self.canvas.get_height()*0.5))
-
     def checkWord(self, user_text):
         if user_text.lower().strip(' ') == self.word:
             self.word_correct_count += 1
@@ -52,7 +43,7 @@ class Word():
 
     def renderInputBox(self, color, userText):
 
-        self.draw.draw_text_with_outline(35, self.meaning, 'white', self.canvas.get_width()*0.5, self.canvas.get_height()*0.5)
+        self.draw.draw_text_with_outline(35, self.meaning, 'white', self.canvas.get_width()*0.5, self.canvas.get_height()*0.45)
 
         pygame.draw.rect(self.canvas, 'black', self.input_space)
         pygame.draw.rect(self.canvas, color, self.input_space, 1)
@@ -62,7 +53,7 @@ class Word():
 
         self.input_space.w = max(self.canvas.get_width()/4, text_surface.get_width() + 10)
 
-        self.input_space.center = (((self.canvas.get_width()/2)), self.canvas.get_height()*0.8)
+        self.input_space.center = (((self.canvas.get_width()/2)), self.canvas.get_height()*0.75)
 
     def reset_word_count(self):
         self.word_correct_count = 0

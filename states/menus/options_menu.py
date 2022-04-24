@@ -11,19 +11,19 @@ class Options(Menu):
 
         # size, text, color, % canvas width, % canvas height
         self.options = (
-            [8, "Fullscreen", "white", .20, .35],
-            [7, "Max FPS", "white", .20, .45],
-            [7, "Overall volume", "white", .20, .55],
-            [7, "Music volume", "white", .20, .65],
-            [7, "Effect volume", "white", .20, .75],
+            [9, "Fullscreen", "white", .20, .30],
+            [8, "Max FPS", "white", .20, .40],
+            [8, "Overall volume", "white", .20, .50],
+            [8, "Music volume", "white", .20, .60],
+            [8, "Effect volume", "white", .20, .70],
         )
         # size, tect, color, % canvas width, % canvas height, num of setable value
         self.setted_value = (
-            [8, self.fullscreen, "white", .75, .35, 2],
-            [7, self.max_fps, "white", .75, .45, 2],
-            [7, self.overall_volume, "white", .75, .55, 11],
-            [7, self.music_volume, "white", .75, .65, 11],
-            [7, self.effect_volume, "white", .75, .75, 11],
+            [9, self.fullscreen, "white", .75, .30, 2],
+            [8, self.max_fps, "white", .75, .40, 2],
+            [8, self.overall_volume, "white", .75, .50, 11],
+            [8, self.music_volume, "white", .75, .60, 11],
+            [8, self.effect_volume, "white", .75, .70, 11],
         )
 
         self.menu_index = 0
@@ -61,12 +61,13 @@ class Options(Menu):
     def render(self, surface):
         surface.fill("black")
         self.draw.draw_text(10, "Options", "green",
-                            self.CANVAS_W * .5, self.CANVAS_H * .2)
+                            self.CANVAS_W * .5, self.CANVAS_H * .15)
         self.draw_options()
         if self.is_setting:
             self.draw_setting()
         else:
             self.draw_options_cursor()
+        self.draw.draw_text(8, '<Esc', 'gray', self.CANVAS_W * 0.5, self.CANVAS_H * 0.9)
 
     # change menu index if press up and down button
     def update_cursor(self, actions):
@@ -83,8 +84,8 @@ class Options(Menu):
         self.setted_value[last_index][2] = "white"
         self.options[self.menu_index][0] += 1
         self.setted_value[self.menu_index][0] += 1
-        self.options[self.menu_index][2] = "gray"
-        self.setted_value[self.menu_index][2] = "gray"
+        self.options[self.menu_index][2] = "yellow"
+        self.setted_value[self.menu_index][2] = "yellow"
 
     # get value from game dict and assign to variable
     def get_setted_value(self):
@@ -122,7 +123,7 @@ class Options(Menu):
     # draw cursor that point to options setting
     def draw_options_cursor(self):
         # setting cursor
-        self.draw.draw_text(6, "->", "gray", (self.CANVAS_W *
+        self.draw.draw_text(8, "->", "yellow", (self.CANVAS_W *
                             self.options[self.menu_index][3]) + self.CURSOR_OFFSET, self.CANVAS_H * self.options[self.menu_index][4])
 
     # run setting method base on menu_index
@@ -142,9 +143,9 @@ class Options(Menu):
     def draw_setting(self):
         self.options[self.menu_index][2] = "yellow"
         self.setted_value[self.menu_index][2] = "yellow"
-        self.draw.draw_text(6, "<", "yellow", (self.CANVAS_W *
+        self.draw.draw_text(8, "<", "yellow", (self.CANVAS_W *
                             self.setted_value[self.menu_index][3]) + self.SETTING_OFFSET, self.CANVAS_H * self.setted_value[self.menu_index][4])
-        self.draw.draw_text(6, ">", "yellow", (self.CANVAS_W *
+        self.draw.draw_text(8, ">", "yellow", (self.CANVAS_W *
                             self.setted_value[self.menu_index][3]) - self.SETTING_OFFSET, self.CANVAS_H * self.setted_value[self.menu_index][4])
 
     # move setting options cursor when selected

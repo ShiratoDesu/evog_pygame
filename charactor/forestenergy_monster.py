@@ -1,6 +1,3 @@
-from pickle import FALSE
-import pygame
-from assets.sound import Sound 
 from assets.sprites import Sprites
 
 class Forestenergy():
@@ -11,7 +8,7 @@ class Forestenergy():
         self.atk_sound = sound.forest_energy_atk_sound
 
         self.sprite = Sprites()
-        self.sound = Sound(sound.overall_volume, sound.music_volume, sound.effect_volume)
+        self.sound = sound
         self.attacking = False
         self.hitted = False
         

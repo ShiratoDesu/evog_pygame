@@ -12,19 +12,11 @@ class Title(State):
 
     def update(self, delta_time, actions):
         super().update(delta_time, actions)
-        if self.timer.get_time_diff(1000):
+        if self.timer.get_time_diff(2000):
+            self.sound.play_sound(self.sound.confirm_echo_sound)
             new_state = MainMenu(self.game)
             self.draw.fade_screen("white")
             new_state.enter_state()
-        # if actions["enter"]:
-        #     self.sound.play_sound(self.sound.confirm_echo_sound)
-        #     new_state = MainMenu(self.game)
-        #     self.draw.fade_screen("white", new_state)
-        #     new_state.enter_state()
-        # if actions["escape"]:
-        #     self.sound.play_sound(self.sound.back_echo_sound)
-        #     self.game.game_delay(1)
-        #     self.game.exit_game()
 
     def render(self, surface):
         surface.fill("white")

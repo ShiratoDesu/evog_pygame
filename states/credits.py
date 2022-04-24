@@ -47,9 +47,3 @@ class Credits(State):
         self.draw.draw_text(8, 'Support Ivy', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.650, 'left')
         self.draw.draw_text(8, 'Juanjo Mármol', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.725, 'left')
         self.draw.draw_text(8, 'WallpaperAccess', 'white', self.CANVAS_W * 0.1, self.CANVAS_H * 0.8, 'left')
-
-        
-        # # adviser list
-        # self.draw.draw_text(8, 'Adviser :', 'yellow', self.CANVAS_W * 0.05, self.CANVAS_H * 0.75, 'left')
-        # self.draw.draw_text(7, 'Asst. Prof. Dr.Pattarawit Polpinit', 'white', self.CANVAS_W * 0.07, self.CANVAS_H * 0.82, 'left')
-        # self.draw.draw_text(7, 'Assoc. Prof. Dr.Kanda Runapongsa Saikaew', 'white', self.CANVAS_W * 0.07, self.CANVAS_H * 0.89, 'left')
